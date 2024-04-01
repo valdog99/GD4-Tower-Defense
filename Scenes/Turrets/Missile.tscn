@@ -1,0 +1,80 @@
+[gd_scene load_steps=9 format=3 uid="uid://cgt8ygcmcn76k"]
+
+[ext_resource type="Script" path="res://Scenes/Turrets/Missile.gd" id="1_vc75n"]
+[ext_resource type="Texture2D" uid="uid://cgryfy4k2io6y" path="res://Assets/Towers/towerDefense_tile180.png" id="2_gwoeg"]
+[ext_resource type="Texture2D" uid="uid://d1iv0di2tpmih" path="res://Assets/Towers/towerDefense_tile228.png" id="3_x2nfn"]
+[ext_resource type="Texture2D" uid="uid://bb2p6ckimp5pw" path="res://Assets/Towers/towerDefense_tile251.png" id="4_rru7q"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_46oxw"]
+radius = 175.0
+
+[sub_resource type="Animation" id="Animation_j6bdu"]
+resource_name = "Reload_1"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Turret/Miss1:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 5),
+"update": 0,
+"values": [Vector2(1e-05, 1e-05), Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_w1og7"]
+resource_name = "Reload_2"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Turret/Miss2:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 5),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_w2lk4"]
+_data = {
+"Reload_1": SubResource("Animation_j6bdu"),
+"Reload_2": SubResource("Animation_w1og7")
+}
+
+[node name="Missile_T1" type="Node2D"]
+script = ExtResource("1_vc75n")
+
+[node name="Base" type="Sprite2D" parent="."]
+texture = ExtResource("2_gwoeg")
+
+[node name="Turret" type="Sprite2D" parent="."]
+texture = ExtResource("3_x2nfn")
+
+[node name="Miss1" type="Sprite2D" parent="Turret"]
+texture = ExtResource("4_rru7q")
+offset = Vector2(5, -10)
+
+[node name="Miss2" type="Sprite2D" parent="Turret"]
+texture = ExtResource("4_rru7q")
+offset = Vector2(5, 10)
+
+[node name="Muzzle" type="Marker2D" parent="Turret"]
+position = Vector2(40, 0)
+
+[node name="Range" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Range"]
+shape = SubResource("CircleShape2D_46oxw")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_w2lk4")
+}
+
+[connection signal="body_entered" from="Range" to="." method="_on_range_body_entered"]
+[connection signal="body_exited" from="Range" to="." method="_on_range_body_exited"]

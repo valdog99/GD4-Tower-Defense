@@ -1,0 +1,64 @@
+[gd_scene load_steps=10 format=3 uid="uid://dkd7cyb5cwipx"]
+
+[ext_resource type="Texture2D" uid="uid://b6gw4gsm58cv0" path="res://Assets/Effects/ZapMarks.png" id="1_qj8jl"]
+[ext_resource type="Script" path="res://Scenes/SupportScenes/ZapImpact.gd" id="2_b2j4a"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dbjiw"]
+atlas = ExtResource("1_qj8jl")
+region = Rect2(0, 0, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_irw28"]
+atlas = ExtResource("1_qj8jl")
+region = Rect2(512, 0, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_56bqa"]
+atlas = ExtResource("1_qj8jl")
+region = Rect2(1024, 0, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_srkeh"]
+atlas = ExtResource("1_qj8jl")
+region = Rect2(1536, 0, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6up3x"]
+atlas = ExtResource("1_qj8jl")
+region = Rect2(2048, 0, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6x57m"]
+atlas = ExtResource("1_qj8jl")
+region = Rect2(2560, 0, 512, 512)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_o7q6g"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dbjiw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_irw28")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_56bqa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_srkeh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6up3x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6x57m")
+}],
+"loop": false,
+"name": &"Impact",
+"speed": 5.0
+}]
+
+[node name="ZapImpact" type="AnimatedSprite2D"]
+show_behind_parent = true
+scale = Vector2(0.05, 0.05)
+sprite_frames = SubResource("SpriteFrames_o7q6g")
+animation = &"Impact"
+speed_scale = 2.0
+script = ExtResource("2_b2j4a")
+
+[connection signal="animation_finished" from="." to="." method="_on_animation_finished"]

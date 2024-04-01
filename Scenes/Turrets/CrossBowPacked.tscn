@@ -1,0 +1,245 @@
+[gd_scene load_steps=18 format=3 uid="uid://b04u652x8bwwq"]
+
+[ext_resource type="Script" path="res://Scenes/Turrets/Gun.gd" id="1_ipm51"]
+[ext_resource type="Texture2D" uid="uid://ch6xkhmfsyxmu" path="res://Assets/Towers/CrossBowPackBase.png" id="2_d8fr7"]
+[ext_resource type="Texture2D" uid="uid://bh2vhgsp5l8uq" path="res://Assets/Towers/CrossBowPack1.png" id="3_2pax7"]
+[ext_resource type="Texture2D" uid="uid://b6g66qpbo20t8" path="res://Assets/Towers/CrossBowPack2.png" id="4_d7ws1"]
+[ext_resource type="Texture2D" uid="uid://cf6e5lf81exr7" path="res://Assets/Towers/CrossBowPack3.png" id="5_xo0np"]
+[ext_resource type="Texture2D" uid="uid://ddyxoivjee2vv" path="res://Assets/Towers/CrossBowPack4.png" id="6_p3pn6"]
+[ext_resource type="Texture2D" uid="uid://d4ce0ehlcbtkm" path="res://Assets/Effects/towerDefense_tile297.png" id="7_wlbwl"]
+[ext_resource type="Texture2D" uid="uid://74d2aubq6mq5" path="res://UI/Buttons/arrowUp.png" id="8_4qhne"]
+[ext_resource type="Texture2D" uid="uid://dwoht34quw5w8" path="res://UI/Buttons/blue_button06.png" id="9_f7ah7"]
+[ext_resource type="FontFile" uid="uid://bmfrkd276lcsd" path="res://Assets/Fonts/Kenney Future Narrow.ttf" id="10_2tmtb"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_junct"]
+animations = [{
+"frames": [{
+"duration": 2.0,
+"texture": ExtResource("3_2pax7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_d7ws1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_xo0np")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_p3pn6")
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_liplw"]
+radius = 175.0
+
+[sub_resource type="Animation" id="Animation_jkcxi"]
+resource_name = "Fire"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Distance:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_rfmv2"]
+resource_name = "Upgrade"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect2:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5, 0.75, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(15, 10), Vector2(15, 20), Vector2(15, 10), Vector2(15, 20), Vector2(15, 10)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TextureRect3:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5, 0.75, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(-15, -10), Vector2(-15, -20), Vector2(-15, -10), Vector2(-15, -20), Vector2(-15, -10)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("TextureRect2:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 1,
+"values": []
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("TextureRect3:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 1,
+"values": []
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("UpgradeButton:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, true]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("UpgradeButton/UpgradeLabel:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, true]
+}
+
+[sub_resource type="Animation" id="Animation_fvyml"]
+length = 0.001
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_axb8f"]
+_data = {
+"Fire": SubResource("Animation_jkcxi"),
+"RESET": SubResource("Animation_fvyml"),
+"Upgrade": SubResource("Animation_rfmv2")
+}
+
+[sub_resource type="LabelSettings" id="LabelSettings_5wcti"]
+font = ExtResource("10_2tmtb")
+font_size = 12
+font_color = Color(0.670588, 0.670588, 0, 1)
+outline_size = 3
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 3
+shadow_color = Color(0.152941, 0.160784, 0, 0.627451)
+shadow_offset = Vector2(2, 2)
+
+[node name="CrossBow_T1" type="Node2D"]
+script = ExtResource("1_ipm51")
+
+[node name="Base" type="Sprite2D" parent="."]
+scale = Vector2(0.025, 0.025)
+texture = ExtResource("2_d8fr7")
+
+[node name="Turret" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.03, 0.04)
+sprite_frames = SubResource("SpriteFrames_junct")
+frame = 3
+frame_progress = 1.0
+speed_scale = 1.2
+
+[node name="Muzzle" type="Marker2D" parent="Turret"]
+visible = false
+position = Vector2(43, 0)
+
+[node name="MuzzleFlash" type="Sprite2D" parent="Turret/Muzzle"]
+position = Vector2(10, 0)
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("7_wlbwl")
+
+[node name="Range" type="Area2D" parent="."]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Range"]
+shape = SubResource("CircleShape2D_liplw")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_axb8f")
+}
+
+[node name="TextureRect" type="TextureRect" parent="."]
+visible = false
+modulate = Color(0.956863, 0.956863, 0, 1)
+custom_minimum_size = Vector2(10, 10)
+offset_left = -25.0
+offset_top = -25.3198
+offset_right = -15.0
+offset_bottom = -15.3198
+texture = ExtResource("8_4qhne")
+expand_mode = 1
+
+[node name="TextureRect2" type="TextureRect" parent="."]
+visible = false
+modulate = Color(0.958282, 0.95647, 0, 1)
+custom_minimum_size = Vector2(10, 10)
+offset_left = 15.0
+offset_top = 14.6802
+offset_right = 25.0
+offset_bottom = 24.7861
+texture = ExtResource("8_4qhne")
+expand_mode = 1
+
+[node name="TextureRect3" type="TextureRect" parent="."]
+visible = false
+modulate = Color(0.958282, 0.95647, 0, 1)
+custom_minimum_size = Vector2(30, 30)
+offset_left = -15.0
+offset_top = -14.6802
+offset_right = 15.0
+offset_bottom = 15.3198
+texture = ExtResource("8_4qhne")
+expand_mode = 1
+
+[node name="UpgradeButton" type="TextureButton" parent="."]
+visible = false
+custom_minimum_size = Vector2(75, 25)
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = -37.5
+offset_top = 30.0
+offset_right = 42.5
+offset_bottom = 55.0
+grow_horizontal = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture_normal = ExtResource("9_f7ah7")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="UpgradeLabel" type="Label" parent="UpgradeButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Upgrade"
+label_settings = SubResource("LabelSettings_5wcti")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="body_entered" from="Range" to="." method="_on_range_body_entered"]
+[connection signal="body_exited" from="Range" to="." method="_on_range_body_exited"]

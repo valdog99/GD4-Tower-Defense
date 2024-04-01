@@ -1,0 +1,40 @@
+[gd_scene load_steps=5 format=3 uid="uid://i5wptmajjji"]
+
+[ext_resource type="Script" path="res://Scenes/Enemies/RedTank.gd" id="1_530cq"]
+[ext_resource type="Texture2D" uid="uid://c8nv4rcngm3go" path="res://UI/HPbar.jpg" id="2_p31v6"]
+[ext_resource type="Texture2D" uid="uid://bwp3ije646xh1" path="res://Assets/Enemey/Hazmat.png" id="3_hfrxf"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vea7n"]
+radius = 20.18
+height = 53.32
+
+[node name="Zombie_Hazmat" type="PathFollow2D"]
+loop = false
+script = ExtResource("1_530cq")
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+visible = false
+position = Vector2(5, 0)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_vea7n")
+
+[node name="HealthBar" type="TextureProgressBar" parent="."]
+custom_minimum_size = Vector2(60, 6)
+offset_left = -30.0
+offset_top = -30.0
+offset_right = 30.0
+offset_bottom = -24.0
+value = 50.0
+nine_patch_stretch = true
+texture_under = ExtResource("2_p31v6")
+texture_progress = ExtResource("2_p31v6")
+tint_under = Color(0.278431, 0.00392157, 0.0823529, 1)
+tint_progress = Color(0, 0.584314, 0, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.12, 0.12)
+texture = ExtResource("3_hfrxf")
+
+[node name="Impact" type="Marker2D" parent="."]

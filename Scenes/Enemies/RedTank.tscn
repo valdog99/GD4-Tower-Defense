@@ -1,0 +1,37 @@
+[gd_scene load_steps=5 format=3 uid="uid://bhxd3veukb5as"]
+
+[ext_resource type="Script" path="res://Scenes/Enemies/RedTank.gd" id="1_oyogv"]
+[ext_resource type="Texture2D" uid="uid://c8nv4rcngm3go" path="res://UI/HPbar.jpg" id="3_ioqb7"]
+[ext_resource type="Texture2D" uid="uid://dk1joy4gud46d" path="res://Assets/Enemey/tank_red.png" id="3_v767e"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s3cp3"]
+size = Vector2(46, 38)
+
+[node name="RedTank" type="PathFollow2D"]
+loop = false
+script = ExtResource("1_oyogv")
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+scale = Vector2(0.7, 0.8)
+shape = SubResource("RectangleShape2D_s3cp3")
+
+[node name="HealthBar" type="TextureProgressBar" parent="."]
+custom_minimum_size = Vector2(60, 6)
+offset_left = -30.0
+offset_top = -30.0
+offset_right = 30.0
+offset_bottom = -24.0
+value = 50.0
+nine_patch_stretch = true
+texture_under = ExtResource("3_ioqb7")
+texture_progress = ExtResource("3_ioqb7")
+tint_under = Color(0.278431, 0.00392157, 0.0823529, 1)
+tint_progress = Color(0, 0.584314, 0, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.64, 0.8)
+texture = ExtResource("3_v767e")
+
+[node name="Impact" type="Marker2D" parent="."]
