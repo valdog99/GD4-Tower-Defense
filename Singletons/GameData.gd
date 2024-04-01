@@ -6,37 +6,37 @@ var tower_data = {
 		"cost" : 25,
 		"damage" : 10,
 		"rof" : 1,
-		"range" : 350,
+		"range" : 400,
 		"category" : "Bullet"},
 	"Missile":{
-		"cost" : 50,
+		"cost" : 25,
 		"damage" : 20,
 		"rof" : 1.5,
-		"range" : 750,
+		"range" : 500,
 		"category" : "Missile"},
 	"CrossBow":{
 		"cost" : 25,
 		"damage" : 20,
-		"rof" : 1,
-		"range" : 350,
+		"rof" : 1.2,
+		"range" : 300,
 		"category" : "Arrow"},
 	"TeslaCoil":{
-		"cost" : 25,
+		"cost" : 100,
 		"damage" : 10,
 		"rof" : 0.6,
-		"range" : 350,
+		"range" : 500,
 		"category" : "Zap"},
 	"CrossBowPacked":{
 		"cost" : 50,
-		"damage" : 50,
+		"damage" : 25,
 		"rof" : .8,
-		"range" : 350,
+		"range" : 400,
 		"category" : "Arrow"},
 	"GunPacked":{
 		"cost" : 25,
-		"damage" : 10,
-		"rof" : 1,
-		"range" : 350,
+		"damage" : 20,
+		"rof" : .5,
+		"range" : 500,
 		"category" : "Bullet"
 		}
 }
@@ -45,14 +45,14 @@ var enemy_data = {
 	"Zombie_Normal":{
 		"health" = 50,
 		"damage" = 25,
-		"value" = 25,
+		"value" = 10,
 		"speed" = 150
 	},
 	"Zombie_Hazmat":{
 		"health" = 100,
-		"damage" = 5,
-		"value" = 100,
-		"speed" = 75
+		"damage" = 50,
+		"value" = 20,
+		"speed" = 100
 	},
 	"RedTank":{
 		"health" = 100,
