@@ -58,6 +58,9 @@ tracks/0/keys = {
 "values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_fvyml"]
+length = 0.001
+
 [sub_resource type="Animation" id="Animation_rfmv2"]
 resource_name = "Upgrade"
 loop_mode = 1
@@ -133,9 +136,6 @@ tracks/5/keys = {
 "update": 1,
 "values": [true, true]
 }
-
-[sub_resource type="Animation" id="Animation_fvyml"]
-length = 0.001
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_axb8f"]
 _data = {

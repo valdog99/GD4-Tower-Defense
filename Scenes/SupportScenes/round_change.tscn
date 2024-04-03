@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://y2fiahxu5ds0"]
+
+[ext_resource type="AudioStream" uid="uid://dlamc2jxl254c" path="res://Resources/Sounds/roundChange.mp3" id="1_aygp8"]
+
+[node name="RoundChange" type="AudioStreamPlayer2D"]
+stream = ExtResource("1_aygp8")
+volume_db = 4.602

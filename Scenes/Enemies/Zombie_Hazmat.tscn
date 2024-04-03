@@ -1,12 +1,45 @@
-[gd_scene load_steps=5 format=3 uid="uid://i5wptmajjji"]
+[gd_scene load_steps=8 format=3 uid="uid://i5wptmajjji"]
 
 [ext_resource type="Script" path="res://Scenes/Enemies/RedTank.gd" id="1_530cq"]
-[ext_resource type="Texture2D" uid="uid://c8nv4rcngm3go" path="res://UI/HPbar.jpg" id="2_p31v6"]
+[ext_resource type="Texture2D" uid="uid://c8nv4rcngm3go" path="res://Assets/UI/HPbar.jpg" id="2_p31v6"]
 [ext_resource type="Texture2D" uid="uid://bwp3ije646xh1" path="res://Assets/Enemey/Hazmat.png" id="3_hfrxf"]
+[ext_resource type="AudioStream" uid="uid://dl8sommup4eoh" path="res://Resources/Sounds/zombieScreech.mp3" id="4_hh20i"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vea7n"]
 radius = 20.18
 height = 53.32
+
+[sub_resource type="Animation" id="Animation_o2s6t"]
+resource_name = "Hit"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 1),
+"transitions": PackedFloat32Array(1, 0.287176, 0.132271),
+"update": 0,
+"values": [Color(1, 0.537255, 0.54902, 1), Color(1, 0.537255, 0.54902, 1), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -5), Vector2(0, 5), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jekj4"]
+_data = {
+"Hit": SubResource("Animation_o2s6t")
+}
 
 [node name="Zombie_Hazmat" type="PathFollow2D"]
 loop = false
@@ -38,3 +71,12 @@ scale = Vector2(0.12, 0.12)
 texture = ExtResource("3_hfrxf")
 
 [node name="Impact" type="Marker2D" parent="."]
+
+[node name="Screach" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_hh20i")
+volume_db = 4.194
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_jekj4")
+}

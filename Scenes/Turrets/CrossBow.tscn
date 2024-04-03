@@ -7,8 +7,8 @@
 [ext_resource type="Texture2D" uid="uid://d4ce0ehlcbtkm" path="res://Assets/Effects/towerDefense_tile297.png" id="4_8pd8y"]
 [ext_resource type="Texture2D" uid="uid://c1ch2kxvx7r38" path="res://Assets/Towers/Cross-3.png" id="4_oqt0n"]
 [ext_resource type="Texture2D" uid="uid://bsbsx4rp7okpq" path="res://Assets/Towers/Cross-4.png" id="5_0dcus"]
-[ext_resource type="Texture2D" uid="uid://74d2aubq6mq5" path="res://UI/Buttons/arrowUp.png" id="5_awvo4"]
-[ext_resource type="Texture2D" uid="uid://dwoht34quw5w8" path="res://UI/Buttons/blue_button06.png" id="6_0rcpw"]
+[ext_resource type="Texture2D" uid="uid://74d2aubq6mq5" path="res://Assets/UI/Buttons/arrowUp.png" id="5_awvo4"]
+[ext_resource type="Texture2D" uid="uid://dwoht34quw5w8" path="res://Assets/UI/Buttons/blue_button06.png" id="6_0rcpw"]
 [ext_resource type="FontFile" uid="uid://bmfrkd276lcsd" path="res://Assets/Fonts/Kenney Future Narrow.ttf" id="7_plt4r"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_4n5qb"]

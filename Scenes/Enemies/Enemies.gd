@@ -32,11 +32,14 @@ func move(delta):
 	health_bar.set_position(position - Vector2(30, 30))
 	
 func on_hit(damage, type):
+	var rand = (randi() % 5)
 	impact(type)
-	hp -= damage
+	hp-= damage
 	health_bar.value = hp
-	if hp <= 0:
+	if hp<=0:
 		on_destroy()
+	if(rand==4):
+		get_node("Screach").play()
 	
 
 func impact(type):
@@ -53,6 +56,7 @@ func impact(type):
 	var y_pos = (y_pos_neg + y_pos_pos)
 	
 	var impact_location = Vector2(x_pos, y_pos)
+	
 	if type == "Zap":
 		var new_impact = zap_impact.instantiate()
 		new_impact.position = impact_location
@@ -61,6 +65,9 @@ func impact(type):
 		var new_impact = arrow_impact.instantiate()
 		new_impact.position = impact_location
 		impact_area.add_child(new_impact)
+	if not get_node("AnimationPlayer").is_playing():
+		get_node("AnimationPlayer").play("Hit")
+		
 
 
 func on_destroy():

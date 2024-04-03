@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://bhxd3veukb5as"]
 
 [ext_resource type="Script" path="res://Scenes/Enemies/RedTank.gd" id="1_oyogv"]
-[ext_resource type="Texture2D" uid="uid://c8nv4rcngm3go" path="res://UI/HPbar.jpg" id="3_ioqb7"]
+[ext_resource type="Texture2D" uid="uid://c8nv4rcngm3go" path="res://Assets/UI/HPbar.jpg" id="3_ioqb7"]
 [ext_resource type="Texture2D" uid="uid://dk1joy4gud46d" path="res://Assets/Enemey/tank_red.png" id="3_v767e"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s3cp3"]

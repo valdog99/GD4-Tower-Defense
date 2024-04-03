@@ -3,6 +3,7 @@ extends CanvasLayer
 @onready var hp_bar = get_node("HUD/H/InfoBar/HealthNum")
 #@onready var tween = create_tween()
 @onready var cash_counter = get_node("HUD/H/InfoBar/Bal")
+@onready var wave_counter = get_node("HUD/H/InfoBar/HBox/WaveCounter")
 
 
 
@@ -28,15 +29,12 @@ func set_tower_preview(tower_type, mouse_position):
 	control.set_name("TowerPreview")
 	add_child(control, true)
 	move_child(get_node("TowerPreview"), 0)
-	
 
-	
 func update_tower_preview(new_position, color):
 	get_node("TowerPreview").position = new_position
 	if get_node("TowerPreview/DragTower").modulate != Color(color):
 		get_node("TowerPreview/DragTower").modulate = Color(color)
 		get_node("TowerPreview/Sprite2D").modulate = Color(color)
-		
 
 ##
 ## Game Control Functions
@@ -119,12 +117,7 @@ func debt(tower_type):
 func refund(tower_type):
 	cash_counter.modulate =  Color("ffffff")
 	get_node("HUD/H/InfoBar/DollaSign").modulate = Color("ffffff")
-	var cost = GameData.tower_data[tower_type]["cost"] 
-	var current_cash_int = int(cash_counter.text) 
-	current_cash_int += cost
-	cash_counter.text = str(current_cash_int)
-
-
+	gain_cash(GameData.tower_data[tower_type]["cost"])
 
 func _on_pack_a_pucnch_pressed():
 	if get_parent().build_mode:
@@ -138,3 +131,13 @@ func _on_pack_a_pucnch_pressed():
 		get_tree().paused = true
 		
 	# Replace with function body.
+
+func update_wave_counter(wave):
+	var tally = load("res://Assets/UI/WaveTally" + str(wave) + ".png")
+	wave_counter.texture = tally
+
+func gain_cash(cash):
+	cash_counter.text = str(int(cash_counter.text) + cash)
+	
+	
+	

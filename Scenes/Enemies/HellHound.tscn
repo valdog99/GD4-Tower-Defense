@@ -1,0 +1,107 @@
+[gd_scene load_steps=10 format=3 uid="uid://30clkvk7wph0"]
+
+[ext_resource type="Script" path="res://Scenes/Enemies/HellHound.gd" id="1_wnlfs"]
+[ext_resource type="Texture2D" uid="uid://b6ch546ht0vkv" path="res://Assets/Enemey/hellhound1.png" id="2_b8fku"]
+[ext_resource type="Texture2D" uid="uid://fnmmddxxam8o" path="res://Assets/Enemey/hellhound3.png" id="3_ado4c"]
+[ext_resource type="Texture2D" uid="uid://c8nv4rcngm3go" path="res://Assets/UI/HPbar.jpg" id="4_4bkxr"]
+[ext_resource type="AudioStream" uid="uid://dl8sommup4eoh" path="res://Resources/Sounds/zombieScreech.mp3" id="5_2jipc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ui4qo"]
+size = Vector2(40, 14.5741)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1fnl2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_b8fku")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_ado4c")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="Animation" id="Animation_o2s6t"]
+resource_name = "Hit"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 1),
+"transitions": PackedFloat32Array(1, 0.287176, 0.132271),
+"update": 0,
+"values": [Color(1, 0.537255, 0.54902, 1), Color(1, 0.537255, 0.54902, 1), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -5), Vector2(0, 5), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jekj4"]
+_data = {
+"Hit": SubResource("Animation_o2s6t")
+}
+
+[node name="HellHound" type="PathFollow2D"]
+position = Vector2(0, 1.66667)
+scale = Vector2(1.5, 1.5)
+loop = false
+script = ExtResource("1_wnlfs")
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+position = Vector2(1.33333, -0.180555)
+scale = Vector2(1.5, 1.5)
+shape = SubResource("RectangleShape2D_ui4qo")
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+self_modulate = Color(0.458824, 0.670588, 0.909804, 1)
+sprite_frames = SubResource("SpriteFrames_1fnl2")
+frame_progress = 0.310295
+speed_scale = 0.5
+
+[node name="HealthBar" type="TextureProgressBar" parent="."]
+custom_minimum_size = Vector2(12, 0)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -19.0
+offset_right = 137.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.28, 0.28)
+size_flags_stretch_ratio = 0.0
+value = 100.0
+texture_under = ExtResource("4_4bkxr")
+texture_progress = ExtResource("4_4bkxr")
+tint_under = Color(0.239216, 0.239216, 0.239216, 1)
+tint_progress = Color(0.235294, 0.498039, 0.196078, 1)
+
+[node name="Impact" type="Marker2D" parent="."]
+position = Vector2(-22, -4)
+scale = Vector2(0.28, 0.28)
+
+[node name="Screach" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_2jipc")
+volume_db = 4.194
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_jekj4")
+}
