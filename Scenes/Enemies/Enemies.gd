@@ -5,16 +5,17 @@ signal death(cash)
 
 @onready var type = self.name.rstrip('0123456789')
 @onready var health_bar = get_node("HealthBar")
-@onready var impact_area = get_node("Impact")
-
+#region Load Game Data
 @onready var speed = GameData.enemy_data[type]["speed"]
 @onready var hp = GameData.enemy_data[type]["health"]
 @onready var damage = GameData.enemy_data[type]["damage"]
+#endregion
+#region Preload Impacts
+@onready var impact_area = get_node("Impact")
 @onready var zap_impact = preload("res://Scenes/SupportScenes/ZapImpact.tscn")
 @onready var missile_impact = preload("res://Scenes/SupportScenes/MissileImpact.tscn")
 @onready var arrow_impact = preload("res://Scenes/SupportScenes/ArrowImpact.tscn")
-
-
+#endregion
 
 func _ready():
 	health_bar.max_value = hp
@@ -26,11 +27,11 @@ func _physics_process(delta):
 		emit_signal("base_damage", damage)
 		queue_free()
 	move(delta)
-	
+
 func move(delta):
 	set_progress(get_progress() + speed * delta)
 	health_bar.set_position(position - Vector2(30, 30))
-	
+
 func on_hit(damage, type):
 	var rand = (randi() % 5)
 	impact(type)
@@ -40,7 +41,6 @@ func on_hit(damage, type):
 		on_destroy()
 	if(rand==4):
 		get_node("Screach").play()
-	
 
 func impact(type):
 	## Forces the x & y value of -15 to 15
@@ -67,8 +67,6 @@ func impact(type):
 		impact_area.add_child(new_impact)
 	if not get_node("AnimationPlayer").is_playing():
 		get_node("AnimationPlayer").play("Hit")
-		
-
 
 func on_destroy():
 	emit_signal("death", GameData.enemy_data[type]["value"])

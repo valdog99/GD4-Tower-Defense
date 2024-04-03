@@ -1,0 +1,43 @@
+[gd_scene load_steps=6 format=3 uid="uid://bo8h2417ihxs6"]
+
+[ext_resource type="Texture2D" uid="uid://hb8ccwq0w78n" path="res://Assets/Icons/sellicon.png" id="1_3sfcn"]
+[ext_resource type="Texture2D" uid="uid://pldo6vdv8a82" path="res://Assets/Icons/selliconConfirm.png" id="2_r6tuq"]
+[ext_resource type="Script" path="res://Scenes/Turrets/sell_button.gd" id="3_q7nra"]
+
+[sub_resource type="Animation" id="Animation_fupel"]
+resource_name = "Float"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(-48, -75), Vector2(-48, -50), Vector2(-48, -75)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_b0pys"]
+_data = {
+"Float": SubResource("Animation_fupel")
+}
+
+[node name="SellButton" type="TextureButton"]
+offset_left = -48.0
+offset_top = -71.1554
+offset_right = 61.0
+offset_bottom = 35.8446
+texture_normal = ExtResource("1_3sfcn")
+texture_hover = ExtResource("2_r6tuq")
+stretch_mode = 0
+script = ExtResource("3_q7nra")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_b0pys")
+}
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]

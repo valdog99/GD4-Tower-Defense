@@ -8,8 +8,13 @@ var ready_to_fire = true
 var category
 var missile_num = 0
 
+var inspect_button = preload("res://Scenes/Turrets/inspect.tscn")
+var sell_button = preload("res://Scenes/Turrets/sell_button.tscn")
+
 func _ready():
 	if built:
+		var inspect_button_instance = inspect_button.instantiate()
+		add_child(inspect_button_instance)
 		self.get_node("Range/CollisionShape2D").get_shape().radius = 0.5 * GameData.tower_data[type]["range"]
 
 func _physics_process(delta):
@@ -21,11 +26,25 @@ func _physics_process(delta):
 			fire()
 	else:
 		enemy = null
-		
+
+func _unhandled_input(event):
+	if event.is_action_released("ui_cancel"):
+		delete_sell()
+
+func on_inspect_pressed():
+	var sell_button_instance = sell_button.instantiate()
+	add_child(sell_button_instance)
+
+func on_sell_pressed():
+	queue_free()
+	get_parent().get_parent().get_parent().get_node("UI").gain_cash(GameData.tower_data[type]["cost"] / 2) 
+
+func delete_sell():
+	if get_node("SellButton"):
+		get_node("SellButton").queue_free()
 
 func turn():
 	get_node("Turret").look_at(enemy.position)
-			
 
 func select_enemy():
 	var enemy_progress_array = []
@@ -64,7 +83,7 @@ func fire_missile():
 
 func fire_arrow():
 	get_node("Turret").play("Fire")
-	
+
 func zap():
 	get_node("Turret").visible = true
 	var distance = get_node("Distance")
@@ -72,7 +91,6 @@ func zap():
 	distance.add_point(get_node("Turret").position)
 	distance.add_point(Vector2(enemy.global_position.x - get_node("Turret").global_position.x,  enemy.global_position.y - get_node("Turret").global_position.y))
 	get_node("AnimationPlayer").play("Fire")
-	
 
 func _on_range_body_entered(body):
 	enemy_array.append(body.get_parent())
