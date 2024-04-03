@@ -1,0 +1,43 @@
+[gd_scene load_steps=5 format=3 uid="uid://uxiugrlt4nvk"]
+
+[ext_resource type="Script" path="res://Scenes/Turrets/MissileMove.gd" id="1_lyxg4"]
+[ext_resource type="Texture2D" uid="uid://bb2p6ckimp5pw" path="res://Assets/Towers/towerDefense_tile251.png" id="2_ck3oh"]
+
+[sub_resource type="Animation" id="Animation_2r4ef"]
+resource_name = "Start"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.5),
+"transitions": PackedFloat32Array(1, 0.307786, 1),
+"update": 0,
+"values": [Vector2(0.5, 0.5), Vector2(2, 2), Vector2(0.1, 0.1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_gdxy4"]
+_data = {
+"Start": SubResource("Animation_2r4ef")
+}
+
+[node name="MissileHit" type="CharacterBody2D"]
+position = Vector2(164, 202)
+motion_mode = 1
+script = ExtResource("1_lyxg4")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("2_ck3oh")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_gdxy4")
+}
+
+[connection signal="target_reached" from="NavigationAgent2D" to="." method="_on_navigation_agent_2d_target_reached"]

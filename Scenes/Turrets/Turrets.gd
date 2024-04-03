@@ -10,6 +10,7 @@ var missile_num = 0
 
 var inspect_button = preload("res://Scenes/Turrets/inspect.tscn")
 var sell_button = preload("res://Scenes/Turrets/sell_button.tscn")
+var missile_launch = preload("res://Scenes/Turrets/MissileHit.tscn")
 
 func _ready():
 	if built:
@@ -49,7 +50,8 @@ func turn():
 func select_enemy():
 	var enemy_progress_array = []
 	for i in enemy_array:
-		enemy_progress_array.append(i.progress) ## Progress is how may pixels enemy has travelled
+		if i != null:
+			enemy_progress_array.append(i.progress) ## Progress is how may pixels enemy has travelled
 	var max_offset = enemy_progress_array.max()
 	var enemy_index = enemy_progress_array.find(max_offset)
 	enemy = enemy_array[enemy_index]
@@ -74,9 +76,11 @@ func fire_gun():
 func fire_missile():
 	if missile_num == 0:
 		get_node("AnimationPlayer").play("Reload_1")
+		add_child(missile_launch.instantiate())
 		missile_num += 1
 	elif missile_num == 1:
 		get_node("AnimationPlayer").play("Reload_2")
+		add_child(missile_launch.instantiate())
 		missile_num -= 1
 	else:
 		missile_num = 0

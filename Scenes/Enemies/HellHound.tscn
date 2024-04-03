@@ -25,6 +25,7 @@ animations = [{
 
 [sub_resource type="Animation" id="Animation_o2s6t"]
 resource_name = "Hit"
+length = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -32,10 +33,10 @@ tracks/0/path = NodePath("Sprite2D:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.3, 1),
-"transitions": PackedFloat32Array(1, 0.287176, 0.132271),
+"times": PackedFloat32Array(0, 0.25, 0.5),
+"transitions": PackedFloat32Array(1, 0.965941, 0.953674),
 "update": 0,
-"values": [Color(1, 0.537255, 0.54902, 1), Color(1, 0.537255, 0.54902, 1), Color(1, 1, 1, 1)]
+"values": [Color(1, 1, 1, 1), Color(1, 0.247059, 0.188235, 1), Color(1, 1, 1, 1)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -44,10 +45,10 @@ tracks/1/path = NodePath("Sprite2D:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.8, 1),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.25, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector2(0, 0), Vector2(0, -5), Vector2(0, 5), Vector2(0, 0)]
+"values": [Vector2(0, 0), Vector2(0, -5), Vector2(0, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_jekj4"]
@@ -62,6 +63,7 @@ loop = false
 script = ExtResource("1_wnlfs")
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
 position = Vector2(1.33333, -0.180555)
@@ -70,21 +72,19 @@ shape = SubResource("RectangleShape2D_ui4qo")
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="."]
 self_modulate = Color(0.458824, 0.670588, 0.909804, 1)
+position = Vector2(0, -4)
 sprite_frames = SubResource("SpriteFrames_1fnl2")
-frame_progress = 0.310295
+frame = 1
+frame_progress = 0.716134
 speed_scale = 0.5
 
 [node name="HealthBar" type="TextureProgressBar" parent="."]
+top_level = true
 custom_minimum_size = Vector2(12, 0)
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
 offset_left = -20.0
-offset_top = -19.0
+offset_top = -30.0
 offset_right = 137.0
-offset_bottom = 5.0
-grow_horizontal = 2
-grow_vertical = 2
+offset_bottom = -6.0
 scale = Vector2(0.28, 0.28)
 size_flags_stretch_ratio = 0.0
 value = 100.0

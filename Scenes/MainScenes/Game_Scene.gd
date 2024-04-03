@@ -24,7 +24,7 @@ func _ready():
 	for i in range(5):
 		var wave = GameData.wave_data[map_node.name]["Wave" + str(i + 1)]
 		for z in range(10):
-			var zom_array = ["Zombie_Normal", int(z)]
+			var zom_array = ["Zombie_Normal", int(z + 4)]
 			wave.append(zom_array)
 			
 	

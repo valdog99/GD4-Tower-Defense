@@ -27,9 +27,9 @@ _data = {
 
 [node name="SellButton" type="TextureButton"]
 offset_left = -48.0
-offset_top = -71.1554
+offset_top = -58.5159
 offset_right = 61.0
-offset_bottom = 35.8446
+offset_bottom = 48.4841
 texture_normal = ExtResource("1_3sfcn")
 texture_hover = ExtResource("2_r6tuq")
 stretch_mode = 0

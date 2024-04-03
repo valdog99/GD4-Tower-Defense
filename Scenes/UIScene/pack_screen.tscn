@@ -1,0 +1,327 @@
+[gd_scene load_steps=17 format=3 uid="uid://cp270tkjlc8pp"]
+
+[ext_resource type="Script" path="res://Scenes/MainScenes/PackScreen.gd" id="1_imxdv"]
+[ext_resource type="Texture2D" uid="uid://ddglc2ty1gdgf" path="res://Assets/UI/Buttons/PackAPunch.png" id="2_0g2ws"]
+[ext_resource type="Texture2D" uid="uid://c8nv4rcngm3go" path="res://Assets/UI/HPbar.jpg" id="3_fg10y"]
+[ext_resource type="Texture2D" uid="uid://dd27s24fakytb" path="res://Assets/Towers/Cross-1.png" id="4_o63h3"]
+[ext_resource type="Texture2D" uid="uid://cebpnqfg0hmxc" path="res://Assets/Towers/Gun.png" id="5_5oj5h"]
+[ext_resource type="FontFile" uid="uid://dric6xod7yyjs" path="res://Assets/Fonts/EraserDust.ttf" id="6_e1lth"]
+[ext_resource type="Texture2D" uid="uid://bgal7r5l0crc5" path="res://Assets/UI/Art/back.png" id="7_8yu5u"]
+[ext_resource type="Texture2D" uid="uid://c3srgbhtjidgp" path="res://Assets/UI/Art/Check.png" id="8_jrjo1"]
+[ext_resource type="Texture2D" uid="uid://c82fmtob8egng" path="res://Assets/UI/Art/x.png" id="9_5f7hc"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_6vf3y"]
+font = ExtResource("6_e1lth")
+font_size = 45
+font_color = Color(0.862745, 0.972549, 0.862745, 1)
+shadow_size = 5
+shadow_color = Color(0, 0, 0, 0.239216)
+shadow_offset = Vector2(5, 5)
+
+[sub_resource type="LabelSettings" id="LabelSettings_kk1r8"]
+font = ExtResource("6_e1lth")
+font_size = 45
+font_color = Color(0.690196, 0.00784314, 0, 1)
+outline_color = Color(1, 0.345098, 0.278431, 1)
+shadow_size = 5
+shadow_color = Color(0, 0, 0, 0.239216)
+shadow_offset = Vector2(5, 5)
+
+[sub_resource type="LabelSettings" id="LabelSettings_54xue"]
+font = ExtResource("6_e1lth")
+font_size = 45
+font_color = Color(0.172549, 0.419608, 0.176471, 1)
+outline_color = Color(0, 0.937255, 0.0509804, 1)
+shadow_size = 5
+shadow_color = Color(0, 0, 0, 0.239216)
+shadow_offset = Vector2(5, 5)
+
+[sub_resource type="Animation" id="Animation_jlev4"]
+resource_name = "current_gun"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Current:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 0,
+"values": []
+}
+
+[sub_resource type="Animation" id="Animation_d1ll8"]
+resource_name = "packed_gun"
+
+[sub_resource type="Animation" id="Animation_qt7j1"]
+resource_name = "upgrade_guns"
+loop_mode = 1
+step = 1.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Current:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0001, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(125, 25), Vector2(125, 25), Vector2(125, 50), Vector2(125, 25)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Packed:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(855, 25), Vector2(855, 50), Vector2(855, 25)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5sc1f"]
+_data = {
+"current_gun": SubResource("Animation_jlev4"),
+"packed_gun": SubResource("Animation_d1ll8"),
+"upgrade_guns": SubResource("Animation_qt7j1")
+}
+
+[node name="PackScreen" type="CanvasLayer"]
+process_mode = 2
+script = ExtResource("1_imxdv")
+
+[node name="PackAPunch" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="PackMachine" type="TextureRect" parent="PackAPunch"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -192.0
+offset_right = 192.0
+offset_bottom = 384.0
+grow_horizontal = 2
+texture = ExtResource("2_0g2ws")
+
+[node name="GunsB" type="TextureRect" parent="PackAPunch"]
+self_modulate = Color(0, 0, 0, 0.682353)
+custom_minimum_size = Vector2(1080, 300)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -540.0
+offset_top = -360.0
+offset_right = 540.0
+offset_bottom = -60.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("3_fg10y")
+
+[node name="Guns" type="HBoxContainer" parent="PackAPunch/GunsB"]
+custom_minimum_size = Vector2(1000, 300)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -500.0
+offset_top = -150.0
+offset_right = 500.0
+offset_bottom = 150.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CrossBow" type="TextureButton" parent="PackAPunch/GunsB/Guns" groups=["pack_buttons"]]
+visible = false
+custom_minimum_size = Vector2(200, 250)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+texture_normal = ExtResource("4_o63h3")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Gun" type="TextureButton" parent="PackAPunch/GunsB/Guns" groups=["pack_buttons"]]
+visible = false
+custom_minimum_size = Vector2(200, 250)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+texture_normal = ExtResource("5_5oj5h")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Stats" type="HBoxContainer" parent="PackAPunch/GunsB/Guns"]
+custom_minimum_size = Vector2(1000, 0)
+layout_mode = 2
+
+[node name="Titles" type="VBoxContainer" parent="PackAPunch/GunsB/Guns/Stats"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="___" type="Label" parent="PackAPunch/GunsB/Guns/Stats/Titles"]
+layout_mode = 2
+label_settings = SubResource("LabelSettings_6vf3y")
+
+[node name="Damage" type="Label" parent="PackAPunch/GunsB/Guns/Stats/Titles"]
+layout_mode = 2
+text = "Damage"
+label_settings = SubResource("LabelSettings_6vf3y")
+
+[node name="ROF" type="Label" parent="PackAPunch/GunsB/Guns/Stats/Titles"]
+layout_mode = 2
+text = "Fire Rate"
+label_settings = SubResource("LabelSettings_6vf3y")
+
+[node name="Range" type="Label" parent="PackAPunch/GunsB/Guns/Stats/Titles"]
+layout_mode = 2
+text = "Range"
+label_settings = SubResource("LabelSettings_6vf3y")
+
+[node name="Cost" type="Label" parent="PackAPunch/GunsB/Guns/Stats/Titles"]
+layout_mode = 2
+text = "Cost"
+label_settings = SubResource("LabelSettings_6vf3y")
+
+[node name="OldStats" type="VBoxContainer" parent="PackAPunch/GunsB/Guns/Stats"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="Title" type="Label" parent="PackAPunch/GunsB/Guns/Stats/OldStats"]
+layout_mode = 2
+text = "Current"
+label_settings = SubResource("LabelSettings_kk1r8")
+
+[node name="Damage" type="Label" parent="PackAPunch/GunsB/Guns/Stats/OldStats"]
+layout_mode = 2
+label_settings = SubResource("LabelSettings_kk1r8")
+
+[node name="ROF" type="Label" parent="PackAPunch/GunsB/Guns/Stats/OldStats"]
+layout_mode = 2
+label_settings = SubResource("LabelSettings_kk1r8")
+
+[node name="Range" type="Label" parent="PackAPunch/GunsB/Guns/Stats/OldStats"]
+layout_mode = 2
+label_settings = SubResource("LabelSettings_kk1r8")
+
+[node name="Cost" type="Label" parent="PackAPunch/GunsB/Guns/Stats/OldStats"]
+layout_mode = 2
+label_settings = SubResource("LabelSettings_kk1r8")
+
+[node name="NewStats" type="VBoxContainer" parent="PackAPunch/GunsB/Guns/Stats"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 2
+
+[node name="Title" type="Label" parent="PackAPunch/GunsB/Guns/Stats/NewStats"]
+layout_mode = 2
+text = "New"
+label_settings = SubResource("LabelSettings_54xue")
+horizontal_alignment = 2
+
+[node name="Damage" type="Label" parent="PackAPunch/GunsB/Guns/Stats/NewStats"]
+layout_mode = 2
+text = "New"
+label_settings = SubResource("LabelSettings_54xue")
+horizontal_alignment = 2
+
+[node name="ROF" type="Label" parent="PackAPunch/GunsB/Guns/Stats/NewStats"]
+layout_mode = 2
+text = "New"
+label_settings = SubResource("LabelSettings_54xue")
+horizontal_alignment = 2
+
+[node name="Range" type="Label" parent="PackAPunch/GunsB/Guns/Stats/NewStats"]
+layout_mode = 2
+text = "New"
+label_settings = SubResource("LabelSettings_54xue")
+horizontal_alignment = 2
+
+[node name="Cost" type="Label" parent="PackAPunch/GunsB/Guns/Stats/NewStats"]
+layout_mode = 2
+text = "New"
+label_settings = SubResource("LabelSettings_54xue")
+horizontal_alignment = 2
+
+[node name="UIButtons" type="VBoxContainer" parent="PackAPunch/GunsB/Guns/Stats"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+
+[node name="BackVerify" type="HBoxContainer" parent="PackAPunch/GunsB/Guns/Stats/UIButtons"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+
+[node name="Back" type="TextureButton" parent="PackAPunch/GunsB/Guns/Stats/UIButtons/BackVerify"]
+layout_mode = 2
+size_flags_vertical = 8
+texture_normal = ExtResource("7_8yu5u")
+
+[node name="Verfy" type="TextureButton" parent="PackAPunch/GunsB/Guns/Stats/UIButtons/BackVerify"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+size_flags_vertical = 8
+texture_normal = ExtResource("8_jrjo1")
+
+[node name="Exit" type="TextureButton" parent="PackAPunch/GunsB"]
+layout_mode = 2
+offset_left = 1016.0
+offset_top = 1.0
+offset_right = 1080.0
+offset_bottom = 65.0
+size_flags_horizontal = 10
+size_flags_vertical = 2
+texture_normal = ExtResource("9_5f7hc")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="PackAPunch"]
+libraries = {
+"": SubResource("AnimationLibrary_5sc1f")
+}
+
+[node name="Current" type="TextureRect" parent="PackAPunch"]
+visible = false
+custom_minimum_size = Vector2(300, 300)
+layout_mode = 1
+offset_left = 125.0
+offset_top = 25.0
+offset_right = 425.0
+offset_bottom = 325.0
+expand_mode = 1
+
+[node name="Packed" type="TextureRect" parent="PackAPunch"]
+visible = false
+custom_minimum_size = Vector2(300, 300)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -425.0
+offset_top = 25.0
+offset_right = -125.0
+offset_bottom = 325.0
+grow_horizontal = 0
+expand_mode = 1
+
+[connection signal="pressed" from="PackAPunch/GunsB/Guns/CrossBow" to="." method="_on_cross_bow_pressed"]
+[connection signal="pressed" from="PackAPunch/GunsB/Guns/Gun" to="." method="_on_gun_pressed"]
+[connection signal="pressed" from="PackAPunch/GunsB/Guns/Stats/UIButtons/BackVerify/Back" to="." method="_on_back_pressed"]
+[connection signal="pressed" from="PackAPunch/GunsB/Guns/Stats/UIButtons/BackVerify/Verfy" to="." method="_on_verfy_pressed"]
+[connection signal="pressed" from="PackAPunch/GunsB/Exit" to="." method="_on_exit_pressed"]

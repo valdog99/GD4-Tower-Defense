@@ -65,8 +65,8 @@ func impact(type):
 		var new_impact = arrow_impact.instantiate()
 		new_impact.position = impact_location
 		impact_area.add_child(new_impact)
-	if not get_node("AnimationPlayer").is_playing():
-		get_node("AnimationPlayer").play("Hit")
+	#if not get_node("AnimationPlayer").is_playing():
+	get_node("AnimationPlayer").play("Hit")
 
 func on_destroy():
 	emit_signal("death", GameData.enemy_data[type]["value"])

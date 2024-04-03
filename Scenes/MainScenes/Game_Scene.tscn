@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://d0vckdx2mjsyk"]
+[gd_scene load_steps=24 format=3 uid="uid://d0vckdx2mjsyk"]
 
 [ext_resource type="PackedScene" uid="uid://bt3oeu78kgw50" path="res://Scenes/Maps/map_1.tscn" id="1_mq6ev"]
 [ext_resource type="Script" path="res://Scenes/MainScenes/Game_Scene.gd" id="1_ndaas"]
@@ -15,14 +15,9 @@
 [ext_resource type="FontFile" uid="uid://bmfrkd276lcsd" path="res://Assets/Fonts/Kenney Future Narrow.ttf" id="11_47xdl"]
 [ext_resource type="Texture2D" uid="uid://dnxva50xdvrvs" path="res://Assets/UI/home.png" id="12_dwd0w"]
 [ext_resource type="Texture2D" uid="uid://ddglc2ty1gdgf" path="res://Assets/UI/Buttons/PackAPunch.png" id="12_v6fqf"]
-[ext_resource type="Script" path="res://Scenes/MainScenes/PackScreen.gd" id="14_ac7rr"]
 [ext_resource type="PackedScene" uid="uid://d18w7kr6ryv1f" path="res://Scenes/SupportScenes/wave_counter.tscn" id="15_1p2rm"]
-[ext_resource type="Texture2D" uid="uid://dd27s24fakytb" path="res://Assets/Towers/Cross-1.png" id="15_c80qt"]
-[ext_resource type="Texture2D" uid="uid://cebpnqfg0hmxc" path="res://Assets/Towers/Gun.png" id="16_epi37"]
 [ext_resource type="PackedScene" uid="uid://y2fiahxu5ds0" path="res://Scenes/SupportScenes/round_change.tscn" id="17_nboh6"]
-[ext_resource type="Texture2D" uid="uid://c3srgbhtjidgp" path="res://Assets/UI/Art/Check.png" id="17_r5kst"]
-[ext_resource type="Texture2D" uid="uid://bgal7r5l0crc5" path="res://Assets/UI/Art/back.png" id="18_6pb6n"]
-[ext_resource type="Texture2D" uid="uid://c82fmtob8egng" path="res://Assets/UI/Art/x.png" id="19_fvn76"]
+[ext_resource type="PackedScene" uid="uid://cp270tkjlc8pp" path="res://Scenes/UIScene/pack_screen.tscn" id="18_yqf7s"]
 
 [sub_resource type="SystemFont" id="SystemFont_6838c"]
 
@@ -56,78 +51,6 @@ outline_color = Color(0.266667, 0.713726, 0.45098, 1)
 shadow_size = 10
 shadow_color = Color(0.392157, 1, 0, 0.219608)
 shadow_offset = Vector2(5, 5)
-
-[sub_resource type="LabelSettings" id="LabelSettings_kk1r8"]
-font = ExtResource("11_47xdl")
-font_size = 50
-font_color = Color(0.690196, 0.00784314, 0, 1)
-outline_size = 10
-outline_color = Color(1, 0.345098, 0.278431, 1)
-shadow_size = 10
-shadow_offset = Vector2(5, 5)
-
-[sub_resource type="LabelSettings" id="LabelSettings_54xue"]
-font = ExtResource("11_47xdl")
-font_size = 50
-font_color = Color(0.172549, 0.419608, 0.176471, 1)
-outline_size = 10
-outline_color = Color(0, 0.937255, 0.0509804, 1)
-shadow_size = 10
-shadow_offset = Vector2(5, 5)
-
-[sub_resource type="Animation" id="Animation_jlev4"]
-resource_name = "current_gun"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Current:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(),
-"transitions": PackedFloat32Array(),
-"update": 0,
-"values": []
-}
-
-[sub_resource type="Animation" id="Animation_d1ll8"]
-resource_name = "packed_gun"
-
-[sub_resource type="Animation" id="Animation_qt7j1"]
-resource_name = "upgrade_guns"
-loop_mode = 1
-step = 1.0
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Current:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.0001, 0.5, 1),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [Vector2(125, 25), Vector2(125, 25), Vector2(125, 50), Vector2(125, 25)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Packed:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.5, 1),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector2(855, 25), Vector2(855, 50), Vector2(855, 25)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_5sc1f"]
-_data = {
-"current_gun": SubResource("Animation_jlev4"),
-"packed_gun": SubResource("Animation_d1ll8"),
-"upgrade_guns": SubResource("Animation_qt7j1")
-}
 
 [node name="GameScene" type="Node2D"]
 script = ExtResource("1_ndaas")
@@ -444,209 +367,9 @@ expand_mode = 1
 [node name="RoundChange" parent="UI/HUD" instance=ExtResource("17_nboh6")]
 position = Vector2(228, 0)
 
-[node name="PackScreen" type="CanvasLayer" parent="UI"]
-process_mode = 2
+[node name="PackScreen" parent="UI" instance=ExtResource("18_yqf7s")]
 visible = false
-script = ExtResource("14_ac7rr")
-
-[node name="PackAPunch" type="Control" parent="UI/PackScreen"]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-
-[node name="PackMachine" type="TextureRect" parent="UI/PackScreen/PackAPunch"]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -192.0
-offset_right = 192.0
-offset_bottom = 384.0
-grow_horizontal = 2
-texture = ExtResource("12_v6fqf")
-
-[node name="GunsB" type="TextureRect" parent="UI/PackScreen/PackAPunch"]
-self_modulate = Color(0, 0, 0, 0.682353)
-custom_minimum_size = Vector2(1080, 300)
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -540.0
-offset_top = -360.0
-offset_right = 540.0
-offset_bottom = -60.0
-grow_horizontal = 2
-grow_vertical = 0
-texture = ExtResource("10_1vpf7")
-
-[node name="Guns" type="HBoxContainer" parent="UI/PackScreen/PackAPunch/GunsB"]
-custom_minimum_size = Vector2(1000, 300)
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -500.0
-offset_top = -150.0
-offset_right = 500.0
-offset_bottom = 150.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="CrossBow" type="TextureButton" parent="UI/PackScreen/PackAPunch/GunsB/Guns" groups=["pack_buttons"]]
-custom_minimum_size = Vector2(200, 250)
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 4
-texture_normal = ExtResource("15_c80qt")
-ignore_texture_size = true
-stretch_mode = 0
-
-[node name="Gun" type="TextureButton" parent="UI/PackScreen/PackAPunch/GunsB/Guns" groups=["pack_buttons"]]
-custom_minimum_size = Vector2(200, 250)
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 4
-texture_normal = ExtResource("16_epi37")
-ignore_texture_size = true
-stretch_mode = 0
-
-[node name="Stats" type="HBoxContainer" parent="UI/PackScreen/PackAPunch/GunsB/Guns"]
-visible = false
-custom_minimum_size = Vector2(1000, 0)
-layout_mode = 2
-
-[node name="OldStats" type="VBoxContainer" parent="UI/PackScreen/PackAPunch/GunsB/Guns/Stats"]
-custom_minimum_size = Vector2(200, 0)
-layout_mode = 2
-size_flags_horizontal = 0
-
-[node name="Title" type="Label" parent="UI/PackScreen/PackAPunch/GunsB/Guns/Stats/OldStats"]
-layout_mode = 2
-text = "Current"
-label_settings = SubResource("LabelSettings_kk1r8")
-
-[node name="Damage" type="Label" parent="UI/PackScreen/PackAPunch/GunsB/Guns/Stats/OldStats"]
-layout_mode = 2
-label_settings = SubResource("LabelSettings_kk1r8")
-
-[node name="ROF" type="Label" parent="UI/PackScreen/PackAPunch/GunsB/Guns/Stats/OldStats"]
-layout_mode = 2
-label_settings = SubResource("LabelSettings_kk1r8")
-
-[node name="Range" type="Label" parent="UI/PackScreen/PackAPunch/GunsB/Guns/Stats/OldStats"]
-layout_mode = 2
-label_settings = SubResource("LabelSettings_kk1r8")
-
-[node name="Cost" type="Label" parent="UI/PackScreen/PackAPunch/GunsB/Guns/Stats/OldStats"]
-layout_mode = 2
-label_settings = SubResource("LabelSettings_kk1r8")
-
-[node name="NewStats" type="VBoxContainer" parent="UI/PackScreen/PackAPunch/GunsB/Guns/Stats"]
-custom_minimum_size = Vector2(200, 0)
-layout_mode = 2
-size_flags_horizontal = 2
-
-[node name="Title" type="Label" parent="UI/PackScreen/PackAPunch/GunsB/Guns/Stats/NewStats"]
-layout_mode = 2
-text = "New"
-label_settings = SubResource("LabelSettings_54xue")
-horizontal_alignment = 2
-
-[node name="Damage" type="Label" parent="UI/PackScreen/PackAPunch/GunsB/Guns/Stats/NewStats"]
-layout_mode = 2
-text = "New"
-label_settings = SubResource("LabelSettings_54xue")
-horizontal_alignment = 2
-
-[node name="ROF" type="Label" parent="UI/PackScreen/PackAPunch/GunsB/Guns/Stats/NewStats"]
-layout_mode = 2
-text = "New"
-label_settings = SubResource("LabelSettings_54xue")
-horizontal_alignment = 2
-
-[node name="Range" type="Label" parent="UI/PackScreen/PackAPunch/GunsB/Guns/Stats/NewStats"]
-layout_mode = 2
-text = "New"
-label_settings = SubResource("LabelSettings_54xue")
-horizontal_alignment = 2
-
-[node name="Cost" type="Label" parent="UI/PackScreen/PackAPunch/GunsB/Guns/Stats/NewStats"]
-layout_mode = 2
-text = "New"
-label_settings = SubResource("LabelSettings_54xue")
-horizontal_alignment = 2
-
-[node name="UIButtons" type="VBoxContainer" parent="UI/PackScreen/PackAPunch/GunsB/Guns/Stats"]
-layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 0
-
-[node name="BackVerify" type="HBoxContainer" parent="UI/PackScreen/PackAPunch/GunsB/Guns/Stats/UIButtons"]
-visible = false
-layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 0
-
-[node name="Back" type="TextureButton" parent="UI/PackScreen/PackAPunch/GunsB/Guns/Stats/UIButtons/BackVerify"]
-layout_mode = 2
-size_flags_vertical = 8
-texture_normal = ExtResource("18_6pb6n")
-
-[node name="Verfy" type="TextureButton" parent="UI/PackScreen/PackAPunch/GunsB/Guns/Stats/UIButtons/BackVerify"]
-custom_minimum_size = Vector2(80, 80)
-layout_mode = 2
-size_flags_vertical = 8
-texture_normal = ExtResource("17_r5kst")
-
-[node name="Exit" type="TextureButton" parent="UI/PackScreen/PackAPunch/GunsB/Guns"]
-layout_mode = 2
-size_flags_horizontal = 10
-size_flags_vertical = 2
-texture_normal = ExtResource("19_fvn76")
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="UI/PackScreen/PackAPunch"]
-libraries = {
-"": SubResource("AnimationLibrary_5sc1f")
-}
-
-[node name="Current" type="TextureRect" parent="UI/PackScreen/PackAPunch"]
-visible = false
-custom_minimum_size = Vector2(300, 300)
-layout_mode = 1
-offset_left = 125.0
-offset_top = 25.0
-offset_right = 425.0
-offset_bottom = 325.0
-expand_mode = 1
-
-[node name="Packed" type="TextureRect" parent="UI/PackScreen/PackAPunch"]
-visible = false
-custom_minimum_size = Vector2(300, 300)
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -425.0
-offset_top = 25.0
-offset_right = -125.0
-offset_bottom = 325.0
-grow_horizontal = 0
-expand_mode = 1
 
 [connection signal="pressed" from="UI/HUD/GameControls/PausePlay" to="UI" method="_on_pause_play_pressed"]
 [connection signal="pressed" from="UI/HUD/GameControls/SpeedUp" to="UI" method="_on_speed_up_pressed"]
 [connection signal="pressed" from="UI/HUD/H/InfoBar/HBox/PackAPucnch" to="UI" method="_on_pack_a_pucnch_pressed"]
-[connection signal="pressed" from="UI/PackScreen/PackAPunch/GunsB/Guns/CrossBow" to="UI/PackScreen" method="_on_cross_bow_pressed"]
-[connection signal="pressed" from="UI/PackScreen/PackAPunch/GunsB/Guns/Gun" to="UI/PackScreen" method="_on_gun_pressed"]
-[connection signal="pressed" from="UI/PackScreen/PackAPunch/GunsB/Guns/Stats/UIButtons/BackVerify/Back" to="UI/PackScreen" method="_on_back_pressed"]
-[connection signal="pressed" from="UI/PackScreen/PackAPunch/GunsB/Guns/Stats/UIButtons/BackVerify/Verfy" to="UI/PackScreen" method="_on_verfy_pressed"]
-[connection signal="pressed" from="UI/PackScreen/PackAPunch/GunsB/Guns/Exit" to="UI/PackScreen" method="_on_exit_pressed"]

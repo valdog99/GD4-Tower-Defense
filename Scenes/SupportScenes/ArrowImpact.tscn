@@ -50,7 +50,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"Impact",
-"speed": 5.0
+"speed": 10.0
 }]
 
 [node name="ArrowImpact" type="AnimatedSprite2D"]
@@ -58,6 +58,8 @@ show_behind_parent = true
 scale = Vector2(0.1, 0.1)
 sprite_frames = SubResource("SpriteFrames_o7q6g")
 animation = &"Impact"
+frame = 5
+frame_progress = 1.0
 speed_scale = 2.0
 script = ExtResource("2_2w064")
 

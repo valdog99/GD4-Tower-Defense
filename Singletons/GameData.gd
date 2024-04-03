@@ -71,7 +71,7 @@ var enemy_data = {
 var wave_data = {
 		"Map1":{
 		"Wave1" = 
-			[["HellHound", 0], ["HellHound", 1]],
+			[["HellHound", 0], ["HellHound", 5]],
 		"Wave2" = 
 			[],
 		"Wave3" = 
