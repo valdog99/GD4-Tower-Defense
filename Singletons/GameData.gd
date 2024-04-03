@@ -21,7 +21,7 @@ var tower_data = {
 		"range" : 300,
 		"category" : "Arrow"},
 	"TeslaCoil":{
-		"cost" : 100,
+		"cost" : 10,
 		"damage" : 10,
 		"rof" : 0.6,
 		"range" : 500,

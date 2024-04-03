@@ -57,16 +57,18 @@ func select_enemy():
 	enemy = enemy_array[enemy_index]
 
 func fire():
+	enemy.on_hit(GameData.tower_data[type]["damage"], GameData.tower_data[type]["category"])
 	ready_to_fire = false
 	if category == "Bullet":
 		fire_gun()
 	elif category == "Missile":
 		fire_missile()
+		print(enemy.progress)
 	elif category == "Arrow":
 		fire_arrow()
 	elif category == "Zap":
 		zap()
-	enemy.on_hit(GameData.tower_data[type]["damage"], GameData.tower_data[type]["category"])
+	
 	await get_tree().create_timer(GameData.tower_data[type]["rof"]).timeout
 	ready_to_fire = true
 
