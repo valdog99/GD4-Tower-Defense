@@ -138,6 +138,9 @@ func update_wave_counter(wave):
 
 func gain_cash(cash):
 	cash_counter.text = str(int(cash_counter.text) + cash)
+
+func loose_cash(cash):
+	cash_counter.text = str(int(cash_counter.text) - cash)
 	
 	
 	

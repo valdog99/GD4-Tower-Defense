@@ -1,0 +1,47 @@
+[gd_scene load_steps=4 format=3 uid="uid://jtahul4s1fdq"]
+
+[ext_resource type="Script" path="res://Scenes/MainScenes/CostText.gd" id="1_y4bav"]
+[ext_resource type="FontFile" uid="uid://b1rjttv0oijd8" path="res://Assets/Fonts/EraserRegular.ttf" id="2_jvlbb"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_g781s"]
+font = ExtResource("2_jvlbb")
+font_size = 60
+font_color = Color(0, 0.282353, 0.0470588, 1)
+outline_size = 5
+outline_color = Color(1, 0, 1, 1)
+shadow_size = 5
+
+[node name="CostText" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_y4bav")
+
+[node name="$" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -5.5
+offset_bottom = 65.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "$"
+label_settings = SubResource("LabelSettings_g781s")
+
+[node name="Cost" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 50.0
+offset_top = -5.5
+offset_right = 90.0
+offset_bottom = 65.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "00"
+label_settings = SubResource("LabelSettings_g781s")

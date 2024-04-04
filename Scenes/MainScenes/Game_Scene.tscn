@@ -1,8 +1,9 @@
-[gd_scene load_steps=24 format=3 uid="uid://d0vckdx2mjsyk"]
+[gd_scene load_steps=23 format=3 uid="uid://d0vckdx2mjsyk"]
 
 [ext_resource type="PackedScene" uid="uid://bt3oeu78kgw50" path="res://Scenes/Maps/map_1.tscn" id="1_mq6ev"]
 [ext_resource type="Script" path="res://Scenes/MainScenes/Game_Scene.gd" id="1_ndaas"]
 [ext_resource type="Script" path="res://Scenes/MainScenes/UI.gd" id="3_fbc3h"]
+[ext_resource type="PackedScene" uid="uid://jtahul4s1fdq" path="res://Scenes/SupportScenes/cost_text.tscn" id="5_tnv53"]
 [ext_resource type="Texture2D" uid="uid://skomcafjbwrq" path="res://Assets/Towers/GunCH.png" id="5_xef0h"]
 [ext_resource type="Texture2D" uid="uid://bx5jeg85d1eog" path="res://Assets/Towers/TeslaTowerIcon.png" id="6_jq7ix"]
 [ext_resource type="Texture2D" uid="uid://dqlxgnq3yi415" path="res://Assets/Towers/GunPackedCH.png" id="7_ipgkq"]
@@ -18,11 +19,6 @@
 [ext_resource type="PackedScene" uid="uid://d18w7kr6ryv1f" path="res://Scenes/SupportScenes/wave_counter.tscn" id="15_1p2rm"]
 [ext_resource type="PackedScene" uid="uid://y2fiahxu5ds0" path="res://Scenes/SupportScenes/round_change.tscn" id="17_nboh6"]
 [ext_resource type="PackedScene" uid="uid://cp270tkjlc8pp" path="res://Scenes/UIScene/pack_screen.tscn" id="18_yqf7s"]
-
-[sub_resource type="SystemFont" id="SystemFont_6838c"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_xw6p4"]
-font = SubResource("SystemFont_6838c")
 
 [sub_resource type="LabelSettings" id="LabelSettings_trn6m"]
 font = ExtResource("11_47xdl")
@@ -86,172 +82,108 @@ alignment = 1
 vertical = true
 
 [node name="Gun" type="TextureButton" parent="UI/HUD/BuildBar" groups=["build_buttons"]]
-self_modulate = Color(0.117647, 0.145098, 0.137255, 1)
-custom_minimum_size = Vector2(150, 100)
+process_mode = 3
+custom_minimum_size = Vector2(125, 100)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-texture_normal = ExtResource("10_1vpf7")
+texture_normal = ExtResource("5_xef0h")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="Icon" type="TextureRect" parent="UI/HUD/BuildBar/Gun"]
-custom_minimum_size = Vector2(75, 75)
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -25.0
-offset_top = -42.0
+[node name="CostText" parent="UI/HUD/BuildBar/Gun" instance=ExtResource("5_tnv53")]
+visible = false
+offset_left = 25.0
+offset_top = 25.0
 offset_right = 25.0
-offset_bottom = 8.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("5_xef0h")
-expand_mode = 1
-
-[node name="Label" type="Label" parent="UI/HUD/BuildBar/Gun"]
-layout_mode = 1
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = -21.0
-offset_bottom = 2.0
-grow_horizontal = 2
-grow_vertical = 0
-label_settings = SubResource("LabelSettings_xw6p4")
+offset_bottom = 25.0
 
 [node name="TeslaCoil" type="TextureButton" parent="UI/HUD/BuildBar" groups=["build_buttons"]]
-self_modulate = Color(0.117647, 0.145098, 0.137255, 1)
-custom_minimum_size = Vector2(150, 100)
+process_mode = 3
+custom_minimum_size = Vector2(125, 100)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-texture_normal = ExtResource("10_1vpf7")
+texture_normal = ExtResource("6_jq7ix")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="Icon" type="TextureRect" parent="UI/HUD/BuildBar/TeslaCoil"]
-custom_minimum_size = Vector2(90, 75)
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -45.0
-offset_top = -37.5
-offset_right = 45.0
-offset_bottom = 37.5
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("6_jq7ix")
-expand_mode = 1
+[node name="CostText" parent="UI/HUD/BuildBar/TeslaCoil" instance=ExtResource("5_tnv53")]
+visible = false
+offset_left = 25.0
+offset_top = 25.0
+offset_right = 25.0
+offset_bottom = 25.0
 
 [node name="GunPacked" type="TextureButton" parent="UI/HUD/BuildBar" groups=["build_buttons"]]
 visible = false
-self_modulate = Color(0.117647, 0.145098, 0.137255, 1)
-custom_minimum_size = Vector2(150, 100)
+custom_minimum_size = Vector2(125, 100)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-texture_normal = ExtResource("10_1vpf7")
+texture_normal = ExtResource("7_ipgkq")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="Icon" type="TextureRect" parent="UI/HUD/BuildBar/GunPacked"]
-custom_minimum_size = Vector2(75, 50)
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -25.0
-offset_top = -42.0
+[node name="CostText" parent="UI/HUD/BuildBar/GunPacked" instance=ExtResource("5_tnv53")]
+visible = false
+offset_left = 25.0
+offset_top = 25.0
 offset_right = 25.0
-offset_bottom = 8.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("7_ipgkq")
-expand_mode = 1
+offset_bottom = 25.0
 
 [node name="Missile" type="TextureButton" parent="UI/HUD/BuildBar" groups=["build_buttons"]]
-self_modulate = Color(0.117647, 0.145098, 0.137255, 1)
-custom_minimum_size = Vector2(150, 100)
+custom_minimum_size = Vector2(125, 100)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-texture_normal = ExtResource("10_1vpf7")
+texture_normal = ExtResource("8_w61c3")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="Icon" type="TextureRect" parent="UI/HUD/BuildBar/Missile"]
-clip_contents = true
+[node name="CostText" parent="UI/HUD/BuildBar/Missile" instance=ExtResource("5_tnv53")]
+visible = false
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -55.0
-offset_top = -50.0
-offset_right = 55.0
-offset_bottom = 50.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("8_w61c3")
-expand_mode = 1
+offset_left = 25.0
+offset_top = 25.0
+offset_right = 25.0
+offset_bottom = 25.0
 
 [node name="CrossBow" type="TextureButton" parent="UI/HUD/BuildBar" groups=["build_buttons"]]
-self_modulate = Color(0.117647, 0.145098, 0.137255, 1)
-custom_minimum_size = Vector2(150, 100)
+custom_minimum_size = Vector2(125, 100)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-texture_normal = ExtResource("10_1vpf7")
+texture_normal = ExtResource("9_3ag03")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="Icon" type="TextureRect" parent="UI/HUD/BuildBar/CrossBow"]
-clip_contents = true
+[node name="CostText" parent="UI/HUD/BuildBar/CrossBow" instance=ExtResource("5_tnv53")]
+visible = false
 layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -62.5
-offset_right = 62.5
-offset_bottom = 100.0
-grow_horizontal = 2
-texture = ExtResource("9_3ag03")
-expand_mode = 1
+offset_left = 25.0
+offset_top = 25.0
+offset_right = 25.0
+offset_bottom = 25.0
 
 [node name="CrossBowPacked" type="TextureButton" parent="UI/HUD/BuildBar" groups=["build_buttons"]]
 visible = false
 self_modulate = Color(0.117647, 0.145098, 0.137255, 1)
-custom_minimum_size = Vector2(150, 100)
+custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-texture_normal = ExtResource("10_1vpf7")
+texture_normal = ExtResource("9_3ag03")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="Icon" type="TextureRect" parent="UI/HUD/BuildBar/CrossBowPacked"]
-clip_contents = true
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -62.5
-offset_right = 62.5
-offset_bottom = 100.0
-grow_horizontal = 2
-texture = ExtResource("9_3ag03")
-expand_mode = 1
+[node name="CostText" parent="UI/HUD/BuildBar/CrossBowPacked" instance=ExtResource("5_tnv53")]
+visible = false
+layout_mode = 2
+offset_left = 25.0
+offset_top = 25.0
+offset_right = 25.0
+offset_bottom = 25.0
 
 [node name="GameControls" type="HBoxContainer" parent="UI/HUD"]
 layout_mode = 1
@@ -318,7 +250,7 @@ horizontal_alignment = 2
 [node name="Bal" type="Label" parent="UI/HUD/H/InfoBar"]
 custom_minimum_size = Vector2(150, 50)
 layout_mode = 2
-text = "50"
+text = "200"
 label_settings = SubResource("LabelSettings_ox1xs")
 
 [node name="HBox" type="HBoxContainer" parent="UI/HUD/H/InfoBar"]
@@ -370,6 +302,18 @@ position = Vector2(228, 0)
 [node name="PackScreen" parent="UI" instance=ExtResource("18_yqf7s")]
 visible = false
 
+[connection signal="mouse_entered" from="UI/HUD/BuildBar/Gun" to="UI/HUD/BuildBar/Gun/CostText" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="UI/HUD/BuildBar/Gun" to="UI/HUD/BuildBar/Gun/CostText" method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="UI/HUD/BuildBar/TeslaCoil" to="UI/HUD/BuildBar/TeslaCoil/CostText" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="UI/HUD/BuildBar/TeslaCoil" to="UI/HUD/BuildBar/TeslaCoil/CostText" method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="UI/HUD/BuildBar/GunPacked" to="UI/HUD/BuildBar/GunPacked/CostText" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="UI/HUD/BuildBar/GunPacked" to="UI/HUD/BuildBar/GunPacked/CostText" method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="UI/HUD/BuildBar/Missile" to="UI/HUD/BuildBar/Missile/CostText" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="UI/HUD/BuildBar/Missile" to="UI/HUD/BuildBar/Missile/CostText" method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="UI/HUD/BuildBar/CrossBow" to="UI/HUD/BuildBar/CrossBow/CostText" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="UI/HUD/BuildBar/CrossBow" to="UI/HUD/BuildBar/CrossBow/CostText" method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="UI/HUD/BuildBar/CrossBowPacked" to="UI/HUD/BuildBar/CrossBowPacked/CostText" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="UI/HUD/BuildBar/CrossBowPacked" to="UI/HUD/BuildBar/CrossBowPacked/CostText" method="_on_mouse_exited"]
 [connection signal="pressed" from="UI/HUD/GameControls/PausePlay" to="UI" method="_on_pause_play_pressed"]
 [connection signal="pressed" from="UI/HUD/GameControls/SpeedUp" to="UI" method="_on_speed_up_pressed"]
 [connection signal="pressed" from="UI/HUD/H/InfoBar/HBox/PackAPucnch" to="UI" method="_on_pack_a_pucnch_pressed"]

@@ -7,38 +7,49 @@ var tower_data = {
 		"damage" : 25,
 		"rof" : 1,
 		"range" : 400,
-		"category" : "Bullet"},
+		"category" : "Bullet",
+		"pack_cost" : 50
+	},
 	"Missile":{
 		"cost" : 25,
 		"damage" : 25,
 		"rof" : 1.5,
 		"range" : 500,
-		"category" : "Missile"},
+		"category" : "Missile",
+		"pack_cost" : 50
+	},
 	"CrossBow":{
 		"cost" : 25,
 		"damage" : 25,
 		"rof" : 1.2,
 		"range" : 300,
-		"category" : "Arrow"},
+		"category" : "Arrow",
+		"pack_cost" : 50
+	},
 	"TeslaCoil":{
 		"cost" : 10,
 		"damage" : 10,
 		"rof" : 0.6,
 		"range" : 500,
-		"category" : "Zap"},
+		"category" : "Zap",
+		"pack_cost" : 50
+	},
 	"CrossBowPacked":{
 		"cost" : 50,
 		"damage" : 25,
 		"rof" : .8,
 		"range" : 400,
-		"category" : "Arrow"},
+		"category" : "Arrow",
+		"pack_cost" : 50
+	},
 	"GunPacked":{
 		"cost" : 25,
 		"damage" : 35,
 		"rof" : .5,
 		"range" : 500,
-		"category" : "Bullet"
-		}
+		"category" : "Bullet",
+		"pack_cost" : 50
+	}
 }
 		
 var enemy_data = {
@@ -71,7 +82,11 @@ var enemy_data = {
 var wave_data = {
 		"Map1":{
 		"Wave1" = 
-			[["HellHound", 0], ["HellHound", 5]],
+			[["HellHound", 5],
+			 ["HellHound", 7],
+			 ["Zombie_Hazmat", 8],
+			 ["Zombie_Hazmat", 10]
+			],
 		"Wave2" = 
 			[],
 		"Wave3" = 
