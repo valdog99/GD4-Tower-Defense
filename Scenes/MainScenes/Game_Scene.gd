@@ -6,6 +6,7 @@ var map_node
 var UI_node
 
 var build_mode = false
+
 var build_valid = false
 var build_tile
 var build_location
@@ -52,7 +53,7 @@ func start_next_wave():
 	var wave_data = retrieve_wave_data()
 	await(get_tree().create_timer(4)).timeout #So waves dont start imedietly
 	spawn_enemies(wave_data)
-	
+	get_node("Base").enemy_enter.connect(on_base_damage)
 func retrieve_wave_data():
 	var wave_data = GameData.wave_data[map_node.name]["Wave" + str(current_wave)]
 	current_wave += 1
@@ -80,6 +81,9 @@ func spawn_enemies(wave_data):
 func initiate_build_mode(tower_type):
 	if build_mode:
 		cancel_build_mode()
+	for i in get_node("Map1/Turrets").get_children():
+		if i.get_node_or_null("SellButton"):
+			i.get_node("SellButton").queue_free()
 	build_type = tower_type
 	build_mode = true
 	get_node("UI").ghost_debt(build_type)
@@ -115,13 +119,14 @@ func verify_and_build():
 			new_tower.type = build_type
 			new_tower.category = GameData.tower_data[build_type]["category"]
 			map_node.get_node("Turrets").add_child(new_tower, true)
-			map_node.get_node("TowerExclusion").set_cell(0, build_tile, 0, Vector2(0, 1))
+			map_node.get_node("TowerExclusion").set_cell(0, build_tile, 5, Vector2(0, 1))
 
-func on_base_damage(damage):
-	base_health = base_health - damage
-	enemies_in_wave -= 1	
+
+func on_base_damage(dps):
+	base_health = int(base_health - dps)
 	if base_health <= 0:
 		emit_signal("game_finished", false)
+		enemies_in_wave = 0
 	else:
 		get_node("UI").update_health_bar(base_health)
 	#	get_node("UI").update_health_bar(base_health)

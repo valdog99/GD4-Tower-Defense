@@ -55,7 +55,7 @@ var tower_data = {
 var enemy_data = {
 	"Zombie_Normal":{
 		"health" = 100,
-		"damage" = 25,
+		"damage" = 5,
 		"value" = 10,
 		"speed" = 150
 	},
@@ -82,10 +82,7 @@ var enemy_data = {
 var wave_data = {
 		"Map1":{
 		"Wave1" = 
-			[["HellHound", 5],
-			 ["HellHound", 7],
-			 ["Zombie_Hazmat", 8],
-			 ["Zombie_Hazmat", 10]
+			[
 			],
 		"Wave2" = 
 			[],

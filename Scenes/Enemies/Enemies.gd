@@ -9,6 +9,7 @@ signal death(cash)
 @onready var speed = GameData.enemy_data[type]["speed"]
 @onready var hp = GameData.enemy_data[type]["health"]
 @onready var damage = GameData.enemy_data[type]["damage"]
+
 #endregion
 #region Preload Impacts
 @onready var impact_area = get_node("Impact")
@@ -17,19 +18,47 @@ signal death(cash)
 @onready var arrow_impact = preload("res://Scenes/SupportScenes/ArrowImpact.tscn")
 #endregion
 
+var path_complete = false
+
 func _ready():
 	health_bar.max_value = hp
 	health_bar.value = hp
 	health_bar.top_level = true
 
 func _physics_process(delta):
-	if progress_ratio == 1.0:
-		emit_signal("base_damage", damage)
-		queue_free()
+	if progress_ratio == 1.0 and path_complete == false:
+		set_progress(get_progress())
+		path_complete = true
+		base_hit()
+
 	move(delta)
 
+func base_hit():
+	set_progress(get_progress())
+	randomize()
+	var rng = RandomNumberGenerator.new()
+	var old_y = global_position.y
+	var new_y = int(rng.randf_range(70.0, 650.0))
+	var dist = int(rng.randf_range(70.0, 650.0)) - global_position.y
+	if dist <= 0:
+		dist = dist * -1
+	print(str(old_y))
+	for i in range(dist):
+		if new_y >= old_y:
+			self.global_position.y += 1
+			await get_tree().create_timer(0.1).timeout
+		else:
+			self.global_position.y -= 1
+			await get_tree().create_timer(0.1).timeout
+
+		
+	
+		#emit_signal("base_damage", damage)
+
 func move(delta):
-	set_progress(get_progress() + speed * delta)
+	if not progress_ratio == 1.0:
+		set_progress(get_progress() + speed * delta)
+		
 	health_bar.set_position(position - Vector2(30, 30))
 
 func on_hit(damage, type):

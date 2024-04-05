@@ -1,8 +1,10 @@
-[gd_scene load_steps=23 format=3 uid="uid://d0vckdx2mjsyk"]
+[gd_scene load_steps=26 format=3 uid="uid://d0vckdx2mjsyk"]
 
 [ext_resource type="PackedScene" uid="uid://bt3oeu78kgw50" path="res://Scenes/Maps/map_1.tscn" id="1_mq6ev"]
 [ext_resource type="Script" path="res://Scenes/MainScenes/Game_Scene.gd" id="1_ndaas"]
 [ext_resource type="Script" path="res://Scenes/MainScenes/UI.gd" id="3_fbc3h"]
+[ext_resource type="Script" path="res://Scenes/Maps/Base.gd" id="3_vh0ua"]
+[ext_resource type="Texture2D" uid="uid://chsn2oxanj63m" path="res://Assets/Environment/Base.png" id="4_5jvff"]
 [ext_resource type="PackedScene" uid="uid://jtahul4s1fdq" path="res://Scenes/SupportScenes/cost_text.tscn" id="5_tnv53"]
 [ext_resource type="Texture2D" uid="uid://skomcafjbwrq" path="res://Assets/Towers/GunCH.png" id="5_xef0h"]
 [ext_resource type="Texture2D" uid="uid://bx5jeg85d1eog" path="res://Assets/Towers/TeslaTowerIcon.png" id="6_jq7ix"]
@@ -13,16 +15,19 @@
 [ext_resource type="Texture2D" uid="uid://22j1qn8ygppx" path="res://Assets/Towers/BowCH.png" id="9_3ag03"]
 [ext_resource type="Texture2D" uid="uid://doa2umyximwso" path="res://Icons/fastForward.png" id="9_cb30i"]
 [ext_resource type="Texture2D" uid="uid://c8nv4rcngm3go" path="res://Assets/UI/HPbar.jpg" id="10_1vpf7"]
-[ext_resource type="FontFile" uid="uid://bmfrkd276lcsd" path="res://Assets/Fonts/Kenney Future Narrow.ttf" id="11_47xdl"]
 [ext_resource type="Texture2D" uid="uid://dnxva50xdvrvs" path="res://Assets/UI/home.png" id="12_dwd0w"]
 [ext_resource type="Texture2D" uid="uid://ddglc2ty1gdgf" path="res://Assets/UI/Buttons/PackAPunch.png" id="12_v6fqf"]
 [ext_resource type="PackedScene" uid="uid://d18w7kr6ryv1f" path="res://Scenes/SupportScenes/wave_counter.tscn" id="15_1p2rm"]
+[ext_resource type="FontFile" uid="uid://dric6xod7yyjs" path="res://Assets/Fonts/EraserDust.ttf" id="16_vjwya"]
 [ext_resource type="PackedScene" uid="uid://y2fiahxu5ds0" path="res://Scenes/SupportScenes/round_change.tscn" id="17_nboh6"]
 [ext_resource type="PackedScene" uid="uid://cp270tkjlc8pp" path="res://Scenes/UIScene/pack_screen.tscn" id="18_yqf7s"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u0u5j"]
+size = Vector2(82, 713)
+
 [sub_resource type="LabelSettings" id="LabelSettings_trn6m"]
-font = ExtResource("11_47xdl")
-font_size = 45
+font = ExtResource("16_vjwya")
+font_size = 60
 outline_size = 10
 outline_color = Color(0, 0.654902, 0, 1)
 shadow_size = 10
@@ -30,7 +35,7 @@ shadow_color = Color(0, 0, 0, 1)
 shadow_offset = Vector2(5, 5)
 
 [sub_resource type="LabelSettings" id="LabelSettings_ox1xs"]
-font = ExtResource("11_47xdl")
+font = ExtResource("16_vjwya")
 font_size = 45
 outline_size = 10
 outline_color = Color(0, 0.705863, 1.15514e-06, 1)
@@ -39,7 +44,7 @@ shadow_color = Color(0, 0, 0, 1)
 shadow_offset = Vector2(5, 5)
 
 [sub_resource type="LabelSettings" id="LabelSettings_e54u0"]
-font = ExtResource("11_47xdl")
+font = ExtResource("16_vjwya")
 font_size = 45
 font_color = Color(0, 0.352941, 0, 1)
 outline_size = 10
@@ -52,6 +57,34 @@ shadow_offset = Vector2(5, 5)
 script = ExtResource("1_ndaas")
 
 [node name="Map1" parent="." instance=ExtResource("1_mq6ev")]
+
+[node name="Base" type="Node2D" parent="."]
+process_mode = 1
+position = Vector2(100, 0)
+script = ExtResource("3_vh0ua")
+
+[node name="TextureRect" type="TextureRect" parent="Base"]
+clip_contents = true
+offset_left = 850.0
+offset_right = 1030.0
+offset_bottom = 720.0
+pivot_offset = Vector2(122, 0)
+texture = ExtResource("4_5jvff")
+expand_mode = 1
+stretch_mode = 2
+flip_h = true
+
+[node name="Area2D" type="Area2D" parent="Base"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Base/Area2D"]
+visible = false
+position = Vector2(922, 357.5)
+shape = SubResource("RectangleShape2D_u0u5j")
+
+[node name="Damage" type="Timer" parent="Base"]
+process_mode = 1
+process_callback = 0
+autostart = true
 
 [node name="UI" type="CanvasLayer" parent="."]
 script = ExtResource("3_fbc3h")
@@ -252,6 +285,7 @@ custom_minimum_size = Vector2(150, 50)
 layout_mode = 2
 text = "200"
 label_settings = SubResource("LabelSettings_ox1xs")
+vertical_alignment = 2
 
 [node name="HBox" type="HBoxContainer" parent="UI/HUD/H/InfoBar"]
 custom_minimum_size = Vector2(400, 80)
@@ -302,6 +336,9 @@ position = Vector2(228, 0)
 [node name="PackScreen" parent="UI" instance=ExtResource("18_yqf7s")]
 visible = false
 
+[connection signal="body_entered" from="Base/Area2D" to="Base" method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Base/Area2D" to="Base" method="_on_area_2d_body_exited"]
+[connection signal="timeout" from="Base/Damage" to="Base" method="_on_damage_timeout"]
 [connection signal="mouse_entered" from="UI/HUD/BuildBar/Gun" to="UI/HUD/BuildBar/Gun/CostText" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="UI/HUD/BuildBar/Gun" to="UI/HUD/BuildBar/Gun/CostText" method="_on_mouse_exited"]
 [connection signal="mouse_entered" from="UI/HUD/BuildBar/TeslaCoil" to="UI/HUD/BuildBar/TeslaCoil/CostText" method="_on_mouse_entered"]

@@ -34,6 +34,7 @@ func _unhandled_input(event):
 
 func on_inspect_pressed():
 	var sell_button_instance = sell_button.instantiate()
+
 	add_child(sell_button_instance)
 
 func on_sell_pressed():

@@ -56,6 +56,7 @@ texture = ExtResource("2_gwoeg")
 texture = ExtResource("3_x2nfn")
 
 [node name="Miss1" type="Sprite2D" parent="Turret"]
+scale = Vector2(1e-05, 1e-05)
 texture = ExtResource("4_rru7q")
 offset = Vector2(5, -10)
 
