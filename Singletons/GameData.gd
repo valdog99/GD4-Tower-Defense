@@ -55,7 +55,7 @@ var tower_data = {
 var enemy_data = {
 	"Zombie_Normal":{
 		"health" = 100,
-		"damage" = 5,
+		"damage" = 1,
 		"value" = 10,
 		"speed" = 150
 	},

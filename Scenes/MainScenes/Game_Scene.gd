@@ -53,7 +53,7 @@ func start_next_wave():
 	var wave_data = retrieve_wave_data()
 	await(get_tree().create_timer(4)).timeout #So waves dont start imedietly
 	spawn_enemies(wave_data)
-	get_node("Base").enemy_enter.connect(on_base_damage)
+	get_node("Base").BaseDamaged.connect(on_base_damage)
 func retrieve_wave_data():
 	var wave_data = GameData.wave_data[map_node.name]["Wave" + str(current_wave)]
 	current_wave += 1
@@ -69,7 +69,7 @@ func spawn_enemies(wave_data):
 		map_node.get_node("Path2D").add_child(new_enemy, true) 
 		var path_node = map_node.get_node("Path2D")
 		#var enemy = path_node.get_node(i[0])
-		new_enemy.base_damage.connect(on_base_damage)
+		#new_enemy.base_damage.connect(on_base_damage)
 		new_enemy.death.connect(on_enemy_killed)
 		await(get_tree().create_timer(i[1])).timeout
 

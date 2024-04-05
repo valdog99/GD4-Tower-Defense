@@ -1,6 +1,6 @@
 extends PathFollow2D
 
-signal base_damage(damage)
+#signal base_damage(damage)
 signal death(cash)
 
 @onready var type = self.name.rstrip('0123456789')
@@ -42,14 +42,13 @@ func base_hit():
 	var dist = int(rng.randf_range(70.0, 650.0)) - global_position.y
 	if dist <= 0:
 		dist = dist * -1
-	print(str(old_y))
 	for i in range(dist):
 		if new_y >= old_y:
 			self.global_position.y += 1
-			await get_tree().create_timer(0.1).timeout
+			await get_tree().create_timer(0.01).timeout
 		else:
 			self.global_position.y -= 1
-			await get_tree().create_timer(0.1).timeout
+			await get_tree().create_timer(0.01).timeout
 
 		
 	
