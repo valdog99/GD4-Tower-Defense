@@ -1,55 +1,47 @@
-extends CanvasLayer
+extends Control
 
-@onready var upgrade_options = get_tree().get_nodes_in_group("pack_buttons")
-@onready var animation = get_node("PackAPunch/AnimationPlayer")
-@onready var old_gun = get_node("PackAPunch/Current")
-@onready var new_gun = get_node("PackAPunch/Packed")
+@onready var animation = get_node("PackAPunch2/AnimationPlayer")
+@onready var old_gun = get_node("PackAPunch2/Current")
+@onready var new_gun = get_node("PackAPunch2/Packed")
 
 var gun_name
 var packed_gun_name
 var gun_type
 var upgrade_name
-var stats = ["name", "damage", "cost", "range", "rof", ]
+var stats = ["name", "damage", "category", "range", "rof", ]
 var gun_types = ["OldGun", "NewGun"]
 
 func _ready():
-	self.visible = false
-	hide_stats()
-	show_guns()
+	self.global_position.y = 0
+	self.global_position.x = 0
+	show_stats(get_parent().name)
+	
 
-func _on_cross_bow_pressed():
-	show_stats("CrossBow")
 
-func _on_gun_pressed():
-	show_stats("Gun")
 
-func get_stat(stat, gun_type):
+func get_stat(stat, gun_type, screen):
 	if stat != "name":
-		get_node("PackAPunch/GunsB/Guns/Stats/Stats/" + stat + "/" + gun_type).text = str(GameData.tower_data[packed_gun_name][stat])
+		if stat == "damage" or stat == "category":
+			get_node(screen + "/B/HBox/" + gun_type + "/Statsdel/Stats1/" + stat + "/" + gun_type).text = str(GameData.tower_data[packed_gun_name][stat])
+		else:
+			get_node(screen + "/B/HBox/" + gun_type + "/Statsdel/Stats2/" + stat + "/" + gun_type).text = str(GameData.tower_data[packed_gun_name][stat])
 	elif stat == "name":
-		get_node("PackAPunch/GunsB/Guns/Stats/Stats/GunNames/" + gun_type).text = packed_gun_name
+		get_node(screen + "/B/HBox/" + gun_type + "/GunName").text = packed_gun_name
+		
+
 
 		
 
 func show_stats(selected):
-	for i in upgrade_options:
-		i.visible = false
-	gun_name = selected
-	packed_gun_name = selected
-	get_node("PackAPunch/GunsB/Guns/Stats/UIButtons/pack_cost/Cost").text = str(GameData.tower_data[selected]["pack_cost"])
-	get_node("PackAPunch/GunsB/Guns/Stats/Stats/GunNames/OldGun").text = selected
-	get_node("PackAPunch/GunsB/Guns/Stats/Stats/GunNames/OldGun").text = selected + "Packed"
-	
-	for i in gun_types:
-		gun_type = i
-		if i != "OldGun":
-			packed_gun_name += "Packed"
-		for s in stats:
-			get_stat(s, gun_type)
+	gun_name = selected.rstrip("0123456789")
+	packed_gun_name = gun_name
+	get_node("InfoScreen/B/HBox/PackAPunch/Cost").text = str(GameData.tower_data[selected]["pack_cost"])
+	#get_node("InfoScreen/B/OldStats/Stats/GunName").text = selected
+	#get_node("PackAPunch/GunsB/Guns/Stats/Stats/GunNames/OldGun").text = selected + "Packed"
 	
 
-	
-	
+	for s in stats:
+		get_stat(s, "OldGun", "InfoScreen")
 
 #endregion
 #region Show Old/New gun stats
@@ -57,10 +49,10 @@ func show_stats(selected):
 	new_gun.texture = load("res://Assets/Towers/" + selected + "Packed.png")
 	old_gun.visible = true
 	new_gun.visible = true
-	get_node("PackAPunch/GunsB/Guns/Stats/UIButtons").visible = true
-	get_node("PackAPunch/GunsB/Guns/Stats").visible = true
+	#get_node("PackAPunch/GunsB/Guns/Stats/UIButtons").visible = true
+	#get_node("PackAPunch/GunsB/Guns/Stats").visible = true
 #endregion
-	animation.play("upgrade_guns")
+	
 	
 func hide_stats():
 	old_gun.visible = false
@@ -69,13 +61,10 @@ func hide_stats():
 	get_node("PackAPunch/GunsB/Guns/Stats/UIButtons").visible = false
 	get_node("PackAPunch/GunsB/Guns/Stats").visible = false
 	
-func show_guns():
-	for i in upgrade_options:
-		i.visible = true
+
 
 func _on_exit_pressed():
 	hide_stats()
-	show_guns()
 	var UI = get_parent()
 	UI.get_node("HUD").visible = true	
 	UI.get_node("PackScreen").visible = false
@@ -84,11 +73,9 @@ func _on_exit_pressed():
 
 func _on_back_pressed():
 	hide_stats()
-	show_guns()
 
 func _on_verfy_pressed():
 	hide_stats()
-	show_guns()
 	var UI = get_parent()
 	UI.get_node("HUD").visible = true	
 	UI.get_node("PackScreen").visible = false
@@ -98,3 +85,19 @@ func _on_verfy_pressed():
 	UI.get_node("HUD/BuildBar/" + gun_name + "Packed").visible = true
 	
 	
+
+
+func _on_pack_a_pucnch_pressed():
+	get_node("InfoScreen").visible = false
+	for i in gun_types:
+		gun_type = i
+		if i != "OldGun":
+			packed_gun_name += "Packed"
+		for s in stats:
+			get_stat(s, gun_type, "PackAPunch2")
+	get_node("PackAPunch2").visible = true
+	animation.play("Upgrade")
+
+
+func _on_sell_button_pressed():
+		get_parent().on_sell_pressed()# Replace with function body.

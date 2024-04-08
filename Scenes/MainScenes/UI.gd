@@ -18,7 +18,7 @@ func set_tower_preview(tower_type, mouse_position):
 #	range_texture.position = Vector2(32,32)
 	var scaling = GameData.tower_data[tower_type]["range"] / 600.0
 	range_texture.scale = Vector2(scaling, scaling)
-	var texture = load("res://UI/range_overlay.png")
+	var texture = load("res://Assets/UI/range_overlay.png")
 	range_texture.texture = texture
 	range_texture.modulate = Color("ad54ff3c")
 

@@ -1,12 +1,10 @@
-[gd_scene load_steps=13 format=3 uid="uid://1q44x6u5y3sb"]
+[gd_scene load_steps=10 format=3 uid="uid://1q44x6u5y3sb"]
 
 [ext_resource type="Script" path="res://Scenes/Turrets/Gun.gd" id="1_iq5w8"]
 [ext_resource type="Texture2D" uid="uid://c3fmtg8h3atfe" path="res://Assets/Towers/towerDefense_tile181.png" id="2_ery28"]
 [ext_resource type="Texture2D" uid="uid://cebpnqfg0hmxc" path="res://Assets/Towers/Gun.png" id="3_o3mr4"]
 [ext_resource type="Texture2D" uid="uid://d4ce0ehlcbtkm" path="res://Assets/Effects/towerDefense_tile297.png" id="4_j82km"]
-[ext_resource type="Texture2D" uid="uid://74d2aubq6mq5" path="res://UI/Buttons/arrowUp.png" id="5_ptnv0"]
-[ext_resource type="Texture2D" uid="uid://dwoht34quw5w8" path="res://UI/Buttons/blue_button06.png" id="6_u6rjs"]
-[ext_resource type="FontFile" uid="uid://bmfrkd276lcsd" path="res://Assets/Fonts/Kenney Future Narrow.ttf" id="7_fh4ko"]
+[ext_resource type="AudioStream" uid="uid://nxgn880avwwr" path="res://Resources/Sounds/zapsplat_warfare_gun_rifles_single_shot_designed_71743.mp3" id="5_i17ay"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_liplw"]
 radius = 175.0
@@ -30,102 +28,6 @@ tracks/0/keys = {
 [sub_resource type="Animation" id="Animation_rfmv2"]
 resource_name = "Upgrade"
 loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("TextureRect:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.25, 0.5, 0.75, 1),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 0,
-"values": [Vector2(-25, -30), Vector2(-25, -20), Vector2(-25, -30), Vector2(-25, -20), Vector2(-25, -30)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("TextureRect2:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.25, 0.5, 0.75, 1),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 0,
-"values": [Vector2(15, 10), Vector2(15, 20), Vector2(15, 10), Vector2(15, 20), Vector2(15, 10)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("TextureRect3:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.25, 0.5, 0.75, 1),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 0,
-"values": [Vector2(-15, -10), Vector2(-15, -20), Vector2(-15, -10), Vector2(-15, -20), Vector2(-15, -10)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("TextureRect:visible")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(),
-"transitions": PackedFloat32Array(),
-"update": 1,
-"values": []
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("TextureRect2:visible")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(),
-"transitions": PackedFloat32Array(),
-"update": 1,
-"values": []
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("TextureRect3:visible")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(),
-"transitions": PackedFloat32Array(),
-"update": 1,
-"values": []
-}
-tracks/6/type = "value"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("UpgradeButton:visible")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [true, true]
-}
-tracks/7/type = "value"
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/path = NodePath("UpgradeButton/UpgradeLabel:visible")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [true, true]
-}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_axb8f"]
 _data = {
@@ -133,17 +35,7 @@ _data = {
 "Upgrade": SubResource("Animation_rfmv2")
 }
 
-[sub_resource type="LabelSettings" id="LabelSettings_5wcti"]
-font = ExtResource("7_fh4ko")
-font_size = 12
-font_color = Color(0.670588, 0.670588, 0, 1)
-outline_size = 3
-outline_color = Color(0, 0, 0, 1)
-shadow_size = 3
-shadow_color = Color(0.152941, 0.160784, 0, 0.627451)
-shadow_offset = Vector2(2, 2)
-
-[node name="Gun_T1" type="Node2D"]
+[node name="Gun" type="Node2D"]
 script = ExtResource("1_iq5w8")
 
 [node name="Base" type="Sprite2D" parent="."]
@@ -173,66 +65,8 @@ libraries = {
 "": SubResource("AnimationLibrary_axb8f")
 }
 
-[node name="TextureRect" type="TextureRect" parent="."]
-visible = false
-modulate = Color(0.956863, 0.956863, 0, 1)
-custom_minimum_size = Vector2(10, 10)
-offset_left = -25.0
-offset_top = -25.3198
-offset_right = -15.0
-offset_bottom = -15.3198
-texture = ExtResource("5_ptnv0")
-expand_mode = 1
-
-[node name="TextureRect2" type="TextureRect" parent="."]
-visible = false
-modulate = Color(0.958282, 0.95647, 0, 1)
-custom_minimum_size = Vector2(10, 10)
-offset_left = 15.0
-offset_top = 14.6802
-offset_right = 25.0
-offset_bottom = 24.7861
-texture = ExtResource("5_ptnv0")
-expand_mode = 1
-
-[node name="TextureRect3" type="TextureRect" parent="."]
-visible = false
-modulate = Color(0.958282, 0.95647, 0, 1)
-custom_minimum_size = Vector2(30, 30)
-offset_left = -15.0
-offset_top = -14.6802
-offset_right = 15.0
-offset_bottom = 15.3198
-texture = ExtResource("5_ptnv0")
-expand_mode = 1
-
-[node name="UpgradeButton" type="TextureButton" parent="."]
-visible = false
-custom_minimum_size = Vector2(75, 25)
-anchors_preset = 10
-anchor_right = 1.0
-offset_left = -37.5
-offset_top = 30.0
-offset_right = 42.5
-offset_bottom = 55.0
-grow_horizontal = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-texture_normal = ExtResource("6_u6rjs")
-ignore_texture_size = true
-stretch_mode = 0
-
-[node name="UpgradeLabel" type="Label" parent="UpgradeButton"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "Upgrade"
-label_settings = SubResource("LabelSettings_5wcti")
-horizontal_alignment = 1
-vertical_alignment = 1
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_i17ay")
 
 [connection signal="body_entered" from="Range" to="." method="_on_range_body_entered"]
 [connection signal="body_exited" from="Range" to="." method="_on_range_body_exited"]

@@ -1,0 +1,126 @@
+[gd_scene load_steps=7 format=3 uid="uid://c51dydv5jo8jl"]
+
+[ext_resource type="Texture2D" uid="uid://c2h5ktmgwoibr" path="res://Assets/UI/Art/BackGround.png" id="1_nn6jw"]
+[ext_resource type="Script" path="res://Scenes/UIScene/GameModeSelect.gd" id="1_y4fda"]
+[ext_resource type="Texture2D" uid="uid://7ikiqair5clo" path="res://Assets/UI/Art/metalPlate.png" id="2_s5iq7"]
+[ext_resource type="FontFile" uid="uid://bmfrkd276lcsd" path="res://Assets/Fonts/Kenney Future Narrow.ttf" id="3_ogvcw"]
+[ext_resource type="FontFile" uid="uid://dric6xod7yyjs" path="res://Assets/Fonts/EraserDust.ttf" id="5_vh478"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_hyhbc"]
+font = ExtResource("5_vh478")
+font_size = 50
+
+[node name="GameModeSelect" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_y4fda")
+
+[node name="B" type="TextureRect" parent="."]
+layout_mode = 1
+offset_right = 1280.0
+offset_bottom = 720.0
+texture = ExtResource("1_nn6jw")
+expand_mode = 1
+
+[node name="M" type="MarginContainer" parent="."]
+layout_mode = 0
+offset_right = 1280.0
+offset_bottom = 720.0
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 50
+
+[node name="HBoxContainer" type="HBoxContainer" parent="M"]
+layout_mode = 2
+theme_override_constants/separation = 100
+
+[node name="Campaign" type="TextureButton" parent="M/HBoxContainer"]
+custom_minimum_size = Vector2(326.67, 0)
+layout_mode = 2
+texture_normal = ExtResource("2_s5iq7")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="M/HBoxContainer/Campaign"]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 0
+offset_left = 34.0
+offset_top = 387.0
+offset_right = 291.0
+offset_bottom = 587.0
+theme_override_fonts/font = ExtResource("3_ogvcw")
+theme_override_font_sizes/font_size = 40
+text = "Campaign"
+label_settings = SubResource("LabelSettings_hyhbc")
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="Endless" type="TextureButton" parent="M/HBoxContainer"]
+custom_minimum_size = Vector2(326.67, 0)
+layout_mode = 2
+texture_normal = ExtResource("2_s5iq7")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="M/HBoxContainer/Endless"]
+custom_minimum_size = Vector2(200, 200)
+offset_left = 34.0
+offset_top = 387.0
+offset_right = 291.0
+offset_bottom = 587.0
+theme_override_fonts/font = ExtResource("3_ogvcw")
+theme_override_font_sizes/font_size = 40
+text = "Endless"
+label_settings = SubResource("LabelSettings_hyhbc")
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="Challenge" type="TextureButton" parent="M/HBoxContainer"]
+custom_minimum_size = Vector2(326.67, 0)
+layout_mode = 2
+texture_normal = ExtResource("2_s5iq7")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="M/HBoxContainer/Challenge"]
+custom_minimum_size = Vector2(200, 200)
+offset_left = 34.0
+offset_top = 387.0
+offset_right = 291.0
+offset_bottom = 587.0
+theme_override_fonts/font = ExtResource("3_ogvcw")
+theme_override_font_sizes/font_size = 40
+text = "Challenge"
+label_settings = SubResource("LabelSettings_hyhbc")
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="Back" type="TextureButton" parent="."]
+layout_mode = 1
+anchors_preset = -1
+offset_right = 120.0
+offset_bottom = 50.0
+
+[node name="Label" type="Label" parent="Back"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("5_vh478")
+theme_override_font_sizes/font_size = 36
+text = "Back"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="M/HBoxContainer/Campaign" to="." method="_on_campaign_pressed"]
+[connection signal="pressed" from="M/HBoxContainer/Endless" to="." method="_on_endless_pressed"]
+[connection signal="pressed" from="M/HBoxContainer/Challenge" to="." method="_on_challenge_pressed"]
+[connection signal="pressed" from="Back" to="." method="_on_back_pressed"]

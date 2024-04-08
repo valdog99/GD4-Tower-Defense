@@ -1,0 +1,399 @@
+[gd_scene load_steps=15 format=3 uid="uid://cao8nognmmp5b"]
+
+[ext_resource type="Texture2D" uid="uid://c8nv4rcngm3go" path="res://Assets/UI/HPbar.jpg" id="1_cyk0v"]
+[ext_resource type="Script" path="res://Scenes/UIScene/info_screen.gd" id="1_rcjjp"]
+[ext_resource type="Texture2D" uid="uid://ddglc2ty1gdgf" path="res://Assets/UI/Buttons/PackAPunch.png" id="2_ph5ik"]
+[ext_resource type="FontFile" uid="uid://dric6xod7yyjs" path="res://Assets/Fonts/EraserDust.ttf" id="3_58gog"]
+[ext_resource type="Texture2D" uid="uid://bgal7r5l0crc5" path="res://Assets/UI/Art/back.png" id="4_o5r2f"]
+[ext_resource type="Texture2D" uid="uid://hb8ccwq0w78n" path="res://Assets/Icons/sellicon.png" id="5_lpogv"]
+[ext_resource type="Texture2D" uid="uid://pldo6vdv8a82" path="res://Assets/Icons/selliconConfirm.png" id="6_kus4m"]
+[ext_resource type="Script" path="res://Scenes/UIScene/SellButton.gd" id="8_802rt"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_m1ku2"]
+font = ExtResource("3_58gog")
+font_size = 35
+
+[sub_resource type="LabelSettings" id="LabelSettings_ra2fu"]
+font = ExtResource("3_58gog")
+font_size = 76
+
+[sub_resource type="LabelSettings" id="LabelSettings_qoex0"]
+font = ExtResource("3_58gog")
+font_size = 25
+font_color = Color(0.862745, 0.972549, 0.862745, 1)
+shadow_size = 5
+shadow_color = Color(0, 0, 0, 0.239216)
+shadow_offset = Vector2(5, 5)
+
+[sub_resource type="LabelSettings" id="LabelSettings_p3oc4"]
+font = ExtResource("3_58gog")
+font_size = 20
+font_color = Color(0.690196, 0.00784314, 0, 1)
+
+[sub_resource type="Animation" id="Animation_jc4b3"]
+resource_name = "Float"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(37.5, 40), Vector2(37.5, 30), Vector2(37.5, 40)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wualy"]
+_data = {
+"Float": SubResource("Animation_jc4b3")
+}
+
+[node name="InfoScreen" type="Control"]
+process_mode = 3
+top_level = true
+custom_minimum_size = Vector2(1280, 720)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1280.0
+offset_bottom = 720.0
+mouse_filter = 2
+script = ExtResource("1_rcjjp")
+
+[node name="B" type="TextureRect" parent="."]
+self_modulate = Color(0, 0, 0, 0.682353)
+custom_minimum_size = Vector2(1080, 200)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -600.0
+offset_top = -240.0
+offset_right = 600.0
+offset_bottom = -40.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("1_cyk0v")
+
+[node name="HBox" type="HBoxContainer" parent="B"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PackAPunch" type="Control" parent="B/HBox"]
+custom_minimum_size = Vector2(250, 200)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+mouse_filter = 2
+
+[node name="PackAPucnch" type="TextureButton" parent="B/HBox/PackAPunch"]
+process_mode = 3
+custom_minimum_size = Vector2(125, 125)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -62.5
+offset_top = -62.5
+offset_right = 62.5
+offset_bottom = 62.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 2
+size_flags_vertical = 4
+texture_normal = ExtResource("2_ph5ik")
+texture_hover = ExtResource("4_o5r2f")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="B/HBox/PackAPunch"]
+custom_minimum_size = Vector2(125, 1)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -115.5
+offset_right = 115.5
+offset_bottom = 37.0
+grow_horizontal = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+text = "Cost To Pack:"
+label_settings = SubResource("LabelSettings_m1ku2")
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="B/HBox/PackAPunch"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -60.0
+offset_top = -52.0
+offset_right = -20.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("3_58gog")
+theme_override_font_sizes/font_size = 55
+text = "$"
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="Cost" type="Label" parent="B/HBox/PackAPunch"]
+custom_minimum_size = Vector2(0, 1)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -26.5
+offset_top = -37.0
+offset_right = 26.5
+grow_horizontal = 2
+grow_vertical = 0
+text = "00
+"
+label_settings = SubResource("LabelSettings_m1ku2")
+horizontal_alignment = 1
+
+[node name="OldGun" type="VBoxContainer" parent="B/HBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="GunName" type="Label" parent="B/HBox/OldGun"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "GunName"
+label_settings = SubResource("LabelSettings_ra2fu")
+
+[node name="Statsdel" type="HBoxContainer" parent="B/HBox/OldGun"]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 60
+
+[node name="Stats1" type="VBoxContainer" parent="B/HBox/OldGun/Statsdel"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+theme_override_constants/separation = 2
+
+[node name="TextureRect" type="TextureRect" parent="B/HBox/OldGun/Statsdel/Stats1"]
+modulate = Color(0.0313726, 0, 0, 0.360784)
+custom_minimum_size = Vector2(200, 5)
+layout_mode = 2
+texture = ExtResource("1_cyk0v")
+expand_mode = 1
+
+[node name="category" type="HBoxContainer" parent="B/HBox/OldGun/Statsdel/Stats1"]
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="category" type="Label" parent="B/HBox/OldGun/Statsdel/Stats1/category"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Damage Type"
+label_settings = SubResource("LabelSettings_qoex0")
+
+[node name="OldGun" type="Label" parent="B/HBox/OldGun/Statsdel/Stats1/category"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Old"
+label_settings = SubResource("LabelSettings_p3oc4")
+
+[node name="TextureRect2" type="TextureRect" parent="B/HBox/OldGun/Statsdel/Stats1"]
+modulate = Color(0.0313726, 0, 0, 0.360784)
+custom_minimum_size = Vector2(200, 5)
+layout_mode = 2
+texture = ExtResource("1_cyk0v")
+expand_mode = 1
+
+[node name="damage" type="HBoxContainer" parent="B/HBox/OldGun/Statsdel/Stats1"]
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="Damage" type="Label" parent="B/HBox/OldGun/Statsdel/Stats1/damage"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Damage"
+label_settings = SubResource("LabelSettings_qoex0")
+
+[node name="OldGun" type="Label" parent="B/HBox/OldGun/Statsdel/Stats1/damage"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Old"
+label_settings = SubResource("LabelSettings_p3oc4")
+
+[node name="TextureRect3" type="TextureRect" parent="B/HBox/OldGun/Statsdel/Stats1"]
+modulate = Color(0.0313726, 0, 0, 0.360784)
+custom_minimum_size = Vector2(200, 5)
+layout_mode = 2
+texture = ExtResource("1_cyk0v")
+expand_mode = 1
+
+[node name="Stats2" type="VBoxContainer" parent="B/HBox/OldGun/Statsdel"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+theme_override_constants/separation = 2
+
+[node name="TextureRect3" type="TextureRect" parent="B/HBox/OldGun/Statsdel/Stats2"]
+modulate = Color(0.0313726, 0, 0, 0.360784)
+custom_minimum_size = Vector2(200, 5)
+layout_mode = 2
+texture = ExtResource("1_cyk0v")
+expand_mode = 1
+
+[node name="range" type="HBoxContainer" parent="B/HBox/OldGun/Statsdel/Stats2"]
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="Damage" type="Label" parent="B/HBox/OldGun/Statsdel/Stats2/range"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Range"
+label_settings = SubResource("LabelSettings_qoex0")
+
+[node name="OldGun" type="Label" parent="B/HBox/OldGun/Statsdel/Stats2/range"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Old"
+label_settings = SubResource("LabelSettings_p3oc4")
+
+[node name="TextureRect4" type="TextureRect" parent="B/HBox/OldGun/Statsdel/Stats2"]
+modulate = Color(0.0313726, 0, 0, 0.360784)
+custom_minimum_size = Vector2(200, 5)
+layout_mode = 2
+texture = ExtResource("1_cyk0v")
+expand_mode = 1
+
+[node name="rof" type="HBoxContainer" parent="B/HBox/OldGun/Statsdel/Stats2"]
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="Fire_Rate" type="Label" parent="B/HBox/OldGun/Statsdel/Stats2/rof"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Rate of
+Fire"
+label_settings = SubResource("LabelSettings_qoex0")
+
+[node name="OldGun" type="Label" parent="B/HBox/OldGun/Statsdel/Stats2/rof"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Old"
+label_settings = SubResource("LabelSettings_p3oc4")
+
+[node name="TextureRect5" type="TextureRect" parent="B/HBox/OldGun/Statsdel/Stats2"]
+modulate = Color(0.0313726, 0, 0, 0.360784)
+custom_minimum_size = Vector2(200, 5)
+layout_mode = 2
+texture = ExtResource("1_cyk0v")
+expand_mode = 1
+
+[node name="SellTower" type="Control" parent="B/HBox"]
+custom_minimum_size = Vector2(250, 200)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+mouse_filter = 1
+
+[node name="SellButton" type="TextureButton" parent="B/HBox/SellTower"]
+custom_minimum_size = Vector2(125, 125)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -62.5
+offset_top = -62.5
+offset_right = 62.5
+offset_bottom = 62.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 2
+size_flags_vertical = 4
+texture_normal = ExtResource("5_lpogv")
+texture_pressed = ExtResource("6_kus4m")
+texture_hover = ExtResource("6_kus4m")
+ignore_texture_size = true
+stretch_mode = 0
+script = ExtResource("8_802rt")
+
+[node name="Label" type="Label" parent="B/HBox/SellTower"]
+custom_minimum_size = Vector2(125, 20)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 10.0
+offset_bottom = 47.0
+grow_horizontal = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+text = "Sell For:"
+label_settings = SubResource("LabelSettings_m1ku2")
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="B/HBox/SellTower"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -60.0
+offset_top = -62.0
+offset_right = -20.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("3_58gog")
+theme_override_font_sizes/font_size = 55
+text = "$"
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="Cost" type="Label" parent="B/HBox/SellTower"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -26.5
+offset_top = -45.0
+offset_right = 26.5
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "00
+"
+label_settings = SubResource("LabelSettings_m1ku2")
+horizontal_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("")
+libraries = {
+"": SubResource("AnimationLibrary_wualy")
+}
+speed_scale = 1.26
+
+[connection signal="pressed" from="B/HBox/PackAPunch/PackAPucnch" to="." method="_on_pack_a_pucnch_pressed"]
+[connection signal="pressed" from="B/HBox/SellTower/SellButton" to="B/HBox/SellTower/SellButton" method="_on_pressed"]

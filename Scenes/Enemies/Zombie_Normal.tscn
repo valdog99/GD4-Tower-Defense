@@ -66,8 +66,10 @@ loop = false
 script = ExtResource("1_44nbn")
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+process_mode = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+process_mode = 1
 position = Vector2(5, 0)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_vea7n")
@@ -87,13 +89,14 @@ tint_under = Color(0.278431, 0.00392157, 0.0823529, 1)
 tint_progress = Color(0, 0.584314, 0, 1)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+process_mode = 1
 rotation = 0.0170992
 scale = Vector2(0.12, 0.12)
 texture = ExtResource("3_n41vi")
 
 [node name="Impact" type="Marker2D" parent="."]
 
-[node name="Screach" type="AudioStreamPlayer" parent="."]
+[node name="Screech" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_yla2b")
 volume_db = 4.194
 

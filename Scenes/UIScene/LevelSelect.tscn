@@ -1,0 +1,122 @@
+[gd_scene load_steps=8 format=3 uid="uid://c78clct67bq6s"]
+
+[ext_resource type="Script" path="res://Scenes/UIScene/LevelSelect.gd" id="1_uadpg"]
+[ext_resource type="Texture2D" uid="uid://c2h5ktmgwoibr" path="res://Assets/UI/Art/BackGround.png" id="2_7gatr"]
+[ext_resource type="Texture2D" uid="uid://dfxpar3tomyu7" path="res://Assets/Maps/map1.png" id="3_1n2ok"]
+[ext_resource type="FontFile" uid="uid://dric6xod7yyjs" path="res://Assets/Fonts/EraserDust.ttf" id="4_c5hm1"]
+[ext_resource type="FontFile" uid="uid://bmfrkd276lcsd" path="res://Assets/Fonts/Kenney Future Narrow.ttf" id="4_yitii"]
+[ext_resource type="Texture2D" uid="uid://diyn8vh6pgisr" path="res://Assets/UI/Art/playW.png" id="6_c0jpf"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_c6ub2"]
+font = ExtResource("4_c5hm1")
+font_size = 85
+
+[node name="LevelSelect" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_uadpg")
+
+[node name="B" type="TextureRect" parent="."]
+layout_mode = 1
+offset_right = 1280.0
+offset_bottom = 720.0
+texture = ExtResource("2_7gatr")
+expand_mode = 1
+
+[node name="MapImage" type="TextureRect" parent="B"]
+layout_mode = 2
+offset_left = 291.0
+offset_top = 110.0
+offset_right = 1002.0
+offset_bottom = 510.0
+texture = ExtResource("3_1n2ok")
+expand_mode = 1
+
+[node name="LevelNumber" type="Label" parent="B"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -40.0
+offset_right = 40.0
+offset_bottom = 100.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("4_c5hm1")
+theme_override_font_sizes/font_size = 80
+text = "1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="M" type="MarginContainer" parent="."]
+layout_mode = 0
+offset_right = 1280.0
+offset_bottom = 720.0
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 50
+
+[node name="Play" type="TextureButton" parent="M"]
+custom_minimum_size = Vector2(350, 75)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+
+[node name="Label" type="Label" parent="M/Play"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("4_yitii")
+theme_override_font_sizes/font_size = 50
+text = "Play"
+label_settings = SubResource("LabelSettings_c6ub2")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SelectRight" type="TextureButton" parent="M"]
+custom_minimum_size = Vector2(140, 150)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+texture_normal = ExtResource("6_c0jpf")
+stretch_mode = 0
+
+[node name="SelectLeft" type="TextureButton" parent="M"]
+custom_minimum_size = Vector2(140, 150)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+texture_normal = ExtResource("6_c0jpf")
+stretch_mode = 0
+flip_h = true
+
+[node name="Back" type="TextureButton" parent="."]
+layout_mode = 1
+anchors_preset = -1
+offset_right = 120.0
+offset_bottom = 50.0
+
+[node name="Label" type="Label" parent="Back"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("4_c5hm1")
+theme_override_font_sizes/font_size = 36
+text = "Back"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="M/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="M/SelectRight" to="." method="_on_select_right_pressed"]
+[connection signal="pressed" from="M/SelectLeft" to="." method="_on_select_left_pressed"]
+[connection signal="pressed" from="Back" to="." method="_on_back_pressed"]

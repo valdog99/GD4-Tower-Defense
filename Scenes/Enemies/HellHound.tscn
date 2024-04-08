@@ -20,7 +20,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"default",
-"speed": 5.0
+"speed": 20.0
 }]
 
 [sub_resource type="Animation" id="Animation_o2s6t"]
@@ -72,10 +72,8 @@ shape = SubResource("RectangleShape2D_ui4qo")
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="."]
 self_modulate = Color(0.458824, 0.670588, 0.909804, 1)
-position = Vector2(0, -4)
 sprite_frames = SubResource("SpriteFrames_1fnl2")
-frame = 1
-frame_progress = 0.716134
+frame_progress = 0.192218
 speed_scale = 0.5
 
 [node name="HealthBar" type="TextureProgressBar" parent="."]

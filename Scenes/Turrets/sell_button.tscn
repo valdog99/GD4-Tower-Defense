@@ -27,17 +27,16 @@ _data = {
 
 [node name="SellButton" type="TextureButton"]
 offset_left = -48.0
-offset_top = -58.5159
+offset_top = -75.0
 offset_right = 61.0
-offset_bottom = 48.4841
+offset_bottom = 32.0
 texture_normal = ExtResource("1_3sfcn")
 texture_hover = ExtResource("2_r6tuq")
 stretch_mode = 0
 script = ExtResource("3_q7nra")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+active = false
 libraries = {
 "": SubResource("AnimationLibrary_b0pys")
 }
-
-[connection signal="pressed" from="." to="." method="_on_pressed"]

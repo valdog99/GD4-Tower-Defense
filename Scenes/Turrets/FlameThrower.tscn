@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://brcd4wdxdt15t"]
+
+[ext_resource type="Script" path="res://Scenes/Turrets/FlamethrowerI.gd" id="1_4anmi"]
+[ext_resource type="Texture2D" uid="uid://bqk8yy3p25x0t" path="res://Assets/Towers/flamethrower.png" id="2_i2v1v"]
+[ext_resource type="AudioStream" uid="uid://ctu6ckxbn2d2r" path="res://Resources/Sounds/zapsplat_nature_fire_flames_large_burn_movement_002_21079.mp3" id="3_ybpbu"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2su8j"]
+radius = 132.13
+
+[node name="FlameThrower" type="Node2D"]
+script = ExtResource("1_4anmi")
+
+[node name="Turret" type="Sprite2D" parent="."]
+texture = ExtResource("2_i2v1v")
+
+[node name="Muzzle" type="Marker2D" parent="Turret"]
+position = Vector2(78, 0)
+
+[node name="Range" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Range"]
+shape = SubResource("CircleShape2D_2su8j")
+one_way_collision_margin = 0.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_ybpbu")
+
+[connection signal="body_entered" from="Range" to="." method="_on_range_body_entered"]
+[connection signal="body_exited" from="Range" to="." method="_on_range_body_exited"]

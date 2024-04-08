@@ -17,9 +17,15 @@ var enemies_in_wave = 0
 
 var base_health = 100
 
+var level
+
 
 func _ready():
-	map_node = get_node("Map1")
+	randomize()
+	var map = load("res://Scenes/Maps/Map" + str(level) + ".tscn").instantiate()
+	add_child(map)
+	move_child(map, 0)
+	map_node = get_node("Map" + str(level))
 	for i in get_tree().get_nodes_in_group("build_buttons"):
 		i.pressed.connect(initiate_build_mode.bind(i.name))
 	for i in range(5):

@@ -9,8 +9,8 @@ var category
 var missile_num = 0
 
 var inspect_button = preload("res://Scenes/Turrets/inspect.tscn")
-var sell_button = preload("res://Scenes/Turrets/sell_button.tscn")
 var missile_launch = preload("res://Scenes/Turrets/MissileHit.tscn")
+var info_screen = preload("res://Scenes/UIScene/info_screen.tscn")
 
 func _ready():
 	if built:
@@ -29,21 +29,28 @@ func _physics_process(delta):
 		enemy = null
 
 func _unhandled_input(event):
-	if event.is_action_released("ui_cancel"):
+	if event.is_action_released("ui_cancel") and get_node("InfoScreen"):
 		delete_sell()
 
 func on_inspect_pressed():
-	var sell_button_instance = sell_button.instantiate()
+	get_parent().get_parent().get_parent().get_node("UI").visible = false
+	#var sell_button_instance = sell_button.instantiate()
+	var info_screen_instance = info_screen.instantiate()
+	add_child(info_screen_instance, true)
+	#add_child(sell_button_instance)
 
-	add_child(sell_button_instance)
-
-func on_sell_pressed():
-	queue_free()
+func sell_tower():
+	get_parent().get_parent().get_parent().get_node("UI").visible = true
 	get_parent().get_parent().get_parent().get_node("UI").gain_cash(GameData.tower_data[type]["cost"] / 2) 
+	queue_free()
 
 func delete_sell():
-	if get_node("SellButton"):
-		get_node("SellButton").queue_free()
+	if get_node("PackAPunch"):
+		get_node("PackAPunch").free()
+		get_node("InfoScreen").visible = true
+	else:
+		get_node("InfoScreen").queue_free()
+		get_parent().get_parent().get_parent().get_node("UI").visible = true
 
 func turn():
 	get_node("Turret").look_at(enemy.position)
@@ -64,7 +71,6 @@ func fire():
 		fire_gun()
 	elif category == "Missile":
 		fire_missile()
-		print(enemy.progress)
 	elif category == "Arrow":
 		fire_arrow()
 	elif category == "Zap":

@@ -30,7 +30,6 @@ func _physics_process(delta):
 		set_progress(get_progress())
 		path_complete = true
 		base_hit()
-
 	move(delta)
 
 func base_hit():

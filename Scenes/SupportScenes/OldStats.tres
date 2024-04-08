@@ -1,0 +1,8 @@
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://cuc1evl6mubai"]
+
+[ext_resource type="FontFile" uid="uid://dric6xod7yyjs" path="res://Assets/Fonts/EraserDust.ttf" id="1_musxt"]
+
+[resource]
+font = ExtResource("1_musxt")
+font_size = 20
+font_color = Color(0.172549, 0.419608, 0.176471, 1)

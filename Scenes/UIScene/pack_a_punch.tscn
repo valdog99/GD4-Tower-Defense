@@ -1,0 +1,425 @@
+[gd_scene load_steps=12 format=3 uid="uid://dcgsl03qa1bnd"]
+
+[ext_resource type="Script" path="res://Scenes/UIScene/pack_a_punch.gd" id="1_cai7i"]
+[ext_resource type="Texture2D" uid="uid://ddglc2ty1gdgf" path="res://Assets/UI/Buttons/PackAPunch.png" id="1_qltjy"]
+[ext_resource type="Texture2D" uid="uid://c8nv4rcngm3go" path="res://Assets/UI/HPbar.jpg" id="2_eqrox"]
+[ext_resource type="FontFile" uid="uid://dric6xod7yyjs" path="res://Assets/Fonts/EraserDust.ttf" id="3_s2jdq"]
+[ext_resource type="Texture2D" uid="uid://c3srgbhtjidgp" path="res://Assets/UI/Art/Check.png" id="4_utt4u"]
+[ext_resource type="Texture2D" uid="uid://bgal7r5l0crc5" path="res://Assets/UI/Art/back.png" id="5_jjo4q"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ra2fu"]
+font = ExtResource("3_s2jdq")
+font_size = 76
+
+[sub_resource type="LabelSettings" id="LabelSettings_qoex0"]
+font = ExtResource("3_s2jdq")
+font_size = 25
+font_color = Color(0.862745, 0.972549, 0.862745, 1)
+shadow_size = 5
+shadow_color = Color(0, 0, 0, 0.239216)
+shadow_offset = Vector2(5, 5)
+
+[sub_resource type="LabelSettings" id="LabelSettings_p3oc4"]
+font = ExtResource("3_s2jdq")
+font_size = 20
+font_color = Color(0.690196, 0.00784314, 0, 1)
+
+[sub_resource type="Animation" id="Animation_dcuhn"]
+resource_name = "Upgrade"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Current:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(125, 50), Vector2(125, 25), Vector2(125, 50)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Packed:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(855, 50), Vector2(855, 25), Vector2(855, 50)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_joojd"]
+_data = {
+"Upgrade": SubResource("Animation_dcuhn")
+}
+
+[node name="PackAPunch" type="Control"]
+top_level = true
+custom_minimum_size = Vector2(1280, 720)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1280.0
+offset_bottom = 720.0
+mouse_filter = 2
+script = ExtResource("1_cai7i")
+
+[node name="PackMachine" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -192.0
+offset_right = 192.0
+offset_bottom = 384.0
+grow_horizontal = 2
+texture = ExtResource("1_qltjy")
+
+[node name="B" type="TextureRect" parent="."]
+self_modulate = Color(0, 0, 0, 0.682353)
+custom_minimum_size = Vector2(1080, 200)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -600.0
+offset_top = -240.0
+offset_right = 600.0
+offset_bottom = -40.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("2_eqrox")
+
+[node name="HBox" type="HBoxContainer" parent="B"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 50.0
+offset_right = -50.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="OldGun" type="VBoxContainer" parent="B/HBox"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="GunName" type="Label" parent="B/HBox/OldGun"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "GunName"
+label_settings = SubResource("LabelSettings_ra2fu")
+uppercase = true
+
+[node name="Statsdel" type="HBoxContainer" parent="B/HBox/OldGun"]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 60
+
+[node name="Stats1" type="VBoxContainer" parent="B/HBox/OldGun/Statsdel"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+theme_override_constants/separation = 2
+
+[node name="TextureRect" type="TextureRect" parent="B/HBox/OldGun/Statsdel/Stats1"]
+modulate = Color(0.0313726, 0, 0, 0.360784)
+custom_minimum_size = Vector2(200, 5)
+layout_mode = 2
+texture = ExtResource("2_eqrox")
+expand_mode = 1
+
+[node name="category" type="HBoxContainer" parent="B/HBox/OldGun/Statsdel/Stats1"]
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="category" type="Label" parent="B/HBox/OldGun/Statsdel/Stats1/category"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Damage Type"
+label_settings = SubResource("LabelSettings_qoex0")
+uppercase = true
+
+[node name="OldGun" type="Label" parent="B/HBox/OldGun/Statsdel/Stats1/category"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Old"
+label_settings = SubResource("LabelSettings_p3oc4")
+
+[node name="TextureRect2" type="TextureRect" parent="B/HBox/OldGun/Statsdel/Stats1"]
+modulate = Color(0.0313726, 0, 0, 0.360784)
+custom_minimum_size = Vector2(200, 5)
+layout_mode = 2
+texture = ExtResource("2_eqrox")
+expand_mode = 1
+
+[node name="damage" type="HBoxContainer" parent="B/HBox/OldGun/Statsdel/Stats1"]
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="Damage" type="Label" parent="B/HBox/OldGun/Statsdel/Stats1/damage"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Damage"
+label_settings = SubResource("LabelSettings_qoex0")
+
+[node name="OldGun" type="Label" parent="B/HBox/OldGun/Statsdel/Stats1/damage"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Old"
+label_settings = SubResource("LabelSettings_p3oc4")
+
+[node name="TextureRect3" type="TextureRect" parent="B/HBox/OldGun/Statsdel/Stats1"]
+modulate = Color(0.0313726, 0, 0, 0.360784)
+custom_minimum_size = Vector2(200, 5)
+layout_mode = 2
+texture = ExtResource("2_eqrox")
+expand_mode = 1
+
+[node name="Stats2" type="VBoxContainer" parent="B/HBox/OldGun/Statsdel"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+theme_override_constants/separation = 2
+
+[node name="TextureRect3" type="TextureRect" parent="B/HBox/OldGun/Statsdel/Stats2"]
+modulate = Color(0.0313726, 0, 0, 0.360784)
+custom_minimum_size = Vector2(200, 5)
+layout_mode = 2
+texture = ExtResource("2_eqrox")
+expand_mode = 1
+
+[node name="range" type="HBoxContainer" parent="B/HBox/OldGun/Statsdel/Stats2"]
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="Damage" type="Label" parent="B/HBox/OldGun/Statsdel/Stats2/range"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Range"
+label_settings = SubResource("LabelSettings_qoex0")
+
+[node name="OldGun" type="Label" parent="B/HBox/OldGun/Statsdel/Stats2/range"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Old"
+label_settings = SubResource("LabelSettings_p3oc4")
+
+[node name="TextureRect4" type="TextureRect" parent="B/HBox/OldGun/Statsdel/Stats2"]
+modulate = Color(0.0313726, 0, 0, 0.360784)
+custom_minimum_size = Vector2(200, 5)
+layout_mode = 2
+texture = ExtResource("2_eqrox")
+expand_mode = 1
+
+[node name="rof" type="HBoxContainer" parent="B/HBox/OldGun/Statsdel/Stats2"]
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="Fire_Rate" type="Label" parent="B/HBox/OldGun/Statsdel/Stats2/rof"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Rate of
+Fire"
+label_settings = SubResource("LabelSettings_qoex0")
+
+[node name="OldGun" type="Label" parent="B/HBox/OldGun/Statsdel/Stats2/rof"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Old"
+label_settings = SubResource("LabelSettings_p3oc4")
+
+[node name="TextureRect5" type="TextureRect" parent="B/HBox/OldGun/Statsdel/Stats2"]
+modulate = Color(0.0313726, 0, 0, 0.360784)
+custom_minimum_size = Vector2(200, 5)
+layout_mode = 2
+texture = ExtResource("2_eqrox")
+expand_mode = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="B/HBox"]
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="Verify" type="TextureButton" parent="B/HBox/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 2
+texture_normal = ExtResource("4_utt4u")
+
+[node name="Back" type="TextureButton" parent="B/HBox/VBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("5_jjo4q")
+
+[node name="NewGun" type="VBoxContainer" parent="B/HBox"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="GunName" type="Label" parent="B/HBox/NewGun"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "GunName"
+label_settings = SubResource("LabelSettings_ra2fu")
+uppercase = true
+
+[node name="Statsdel" type="HBoxContainer" parent="B/HBox/NewGun"]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 60
+
+[node name="Stats1" type="VBoxContainer" parent="B/HBox/NewGun/Statsdel"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+theme_override_constants/separation = 2
+
+[node name="TextureRect" type="TextureRect" parent="B/HBox/NewGun/Statsdel/Stats1"]
+modulate = Color(0.0313726, 0, 0, 0.360784)
+custom_minimum_size = Vector2(200, 5)
+layout_mode = 2
+texture = ExtResource("2_eqrox")
+expand_mode = 1
+
+[node name="category" type="HBoxContainer" parent="B/HBox/NewGun/Statsdel/Stats1"]
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="category" type="Label" parent="B/HBox/NewGun/Statsdel/Stats1/category"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Damage Type"
+label_settings = SubResource("LabelSettings_qoex0")
+uppercase = true
+
+[node name="NewGun" type="Label" parent="B/HBox/NewGun/Statsdel/Stats1/category"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Old"
+label_settings = SubResource("LabelSettings_p3oc4")
+
+[node name="TextureRect2" type="TextureRect" parent="B/HBox/NewGun/Statsdel/Stats1"]
+modulate = Color(0.0313726, 0, 0, 0.360784)
+custom_minimum_size = Vector2(200, 5)
+layout_mode = 2
+texture = ExtResource("2_eqrox")
+expand_mode = 1
+
+[node name="damage" type="HBoxContainer" parent="B/HBox/NewGun/Statsdel/Stats1"]
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="Damage" type="Label" parent="B/HBox/NewGun/Statsdel/Stats1/damage"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Damage"
+label_settings = SubResource("LabelSettings_qoex0")
+
+[node name="NewGun" type="Label" parent="B/HBox/NewGun/Statsdel/Stats1/damage"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Old"
+label_settings = SubResource("LabelSettings_p3oc4")
+
+[node name="TextureRect3" type="TextureRect" parent="B/HBox/NewGun/Statsdel/Stats1"]
+modulate = Color(0.0313726, 0, 0, 0.360784)
+custom_minimum_size = Vector2(200, 5)
+layout_mode = 2
+texture = ExtResource("2_eqrox")
+expand_mode = 1
+
+[node name="Stats2" type="VBoxContainer" parent="B/HBox/NewGun/Statsdel"]
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+theme_override_constants/separation = 2
+
+[node name="TextureRect3" type="TextureRect" parent="B/HBox/NewGun/Statsdel/Stats2"]
+modulate = Color(0.0313726, 0, 0, 0.360784)
+custom_minimum_size = Vector2(200, 5)
+layout_mode = 2
+texture = ExtResource("2_eqrox")
+expand_mode = 1
+
+[node name="range" type="HBoxContainer" parent="B/HBox/NewGun/Statsdel/Stats2"]
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="Damage" type="Label" parent="B/HBox/NewGun/Statsdel/Stats2/range"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Range"
+label_settings = SubResource("LabelSettings_qoex0")
+
+[node name="NewGun" type="Label" parent="B/HBox/NewGun/Statsdel/Stats2/range"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Old"
+label_settings = SubResource("LabelSettings_p3oc4")
+
+[node name="TextureRect4" type="TextureRect" parent="B/HBox/NewGun/Statsdel/Stats2"]
+modulate = Color(0.0313726, 0, 0, 0.360784)
+custom_minimum_size = Vector2(200, 5)
+layout_mode = 2
+texture = ExtResource("2_eqrox")
+expand_mode = 1
+
+[node name="rof" type="HBoxContainer" parent="B/HBox/NewGun/Statsdel/Stats2"]
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="Fire_Rate" type="Label" parent="B/HBox/NewGun/Statsdel/Stats2/rof"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Rate of
+Fire"
+label_settings = SubResource("LabelSettings_qoex0")
+
+[node name="NewGun" type="Label" parent="B/HBox/NewGun/Statsdel/Stats2/rof"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Old"
+label_settings = SubResource("LabelSettings_p3oc4")
+
+[node name="TextureRect5" type="TextureRect" parent="B/HBox/NewGun/Statsdel/Stats2"]
+modulate = Color(0.0313726, 0, 0, 0.360784)
+custom_minimum_size = Vector2(200, 5)
+layout_mode = 2
+texture = ExtResource("2_eqrox")
+expand_mode = 1
+
+[node name="Current" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(300, 300)
+layout_mode = 0
+offset_left = 125.0
+offset_top = 50.0
+offset_right = 425.0
+offset_bottom = 350.0
+expand_mode = 1
+
+[node name="Packed" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(300, 300)
+layout_mode = 0
+offset_left = 855.0
+offset_top = 50.0
+offset_right = 1155.0
+offset_bottom = 350.0
+expand_mode = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_joojd")
+}
+
+[connection signal="pressed" from="B/HBox/VBoxContainer/Verify" to="." method="_on_verify_pressed"]
+[connection signal="pressed" from="B/HBox/VBoxContainer/Back" to="." method="_on_back_pressed"]

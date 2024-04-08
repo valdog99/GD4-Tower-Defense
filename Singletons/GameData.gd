@@ -18,6 +18,14 @@ var tower_data = {
 		"category" : "Missile",
 		"pack_cost" : 50
 	},
+	"FlameThrower":{
+		"cost" : 20,
+		"damage" : 0.5,
+		"rof" : 0,
+		"range" : 200,
+		"category" : "Missile",
+		"pack_cost" : 50
+	},
 	"CrossBow":{
 		"cost" : 25,
 		"damage" : 25,
@@ -61,28 +69,32 @@ var enemy_data = {
 	},
 	"Zombie_Hazmat":{
 		"health" = 200,
-		"damage" = 50,
+		"damage" = 5,
 		"value" = 20,
 		"speed" = 100
 	},
+	"Zombie_Crawler":{
+		"health" = 200,
+		"damage" = 2,
+		"value" = 20,
+		"speed" = 80
+	},
 	"HellHound":{
 		"health" = 50,
-		"damage" = 25,
+		"damage" = 3,
 		"value" = 10,
-		"speed" = 200
+		"speed" = 350
 	},
-	"RedTank":{
-		"health" = 100,
-		"damage" = 25,
-		"value" = 50,
-		"speed" = 75
-	}
 }
 
 var wave_data = {
 		"Map1":{
 		"Wave1" = 
-			[
+			[["Zombie_Crawler", 5], 
+			["Zombie_Crawler", 7],
+			["Zombie_hazmat", 8],
+			["Zombie_hazmat", 9],
+			["HellHound", 10],
 			],
 		"Wave2" = 
 			[],

@@ -1,6 +1,5 @@
-[gd_scene load_steps=32 format=3 uid="uid://d0vckdx2mjsyk"]
+[gd_scene load_steps=31 format=3 uid="uid://d0vckdx2mjsyk"]
 
-[ext_resource type="PackedScene" uid="uid://bt3oeu78kgw50" path="res://Scenes/Maps/map_1.tscn" id="1_mq6ev"]
 [ext_resource type="Script" path="res://Scenes/MainScenes/Game_Scene.gd" id="1_ndaas"]
 [ext_resource type="Script" path="res://Scenes/MainScenes/UI.gd" id="3_fbc3h"]
 [ext_resource type="Script" path="res://Scenes/Maps/Base.gd" id="3_vh0ua"]
@@ -9,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://skomcafjbwrq" path="res://Assets/Towers/GunCH.png" id="5_xef0h"]
 [ext_resource type="Texture2D" uid="uid://bgi78qpcyafan" path="res://Assets/UI/Art/shots1.png" id="5_xqqav"]
 [ext_resource type="Texture2D" uid="uid://bx5jeg85d1eog" path="res://Assets/Towers/TeslaTowerIcon.png" id="6_jq7ix"]
+[ext_resource type="Texture2D" uid="uid://boorpiw4bcsmy" path="res://Assets/Towers/FlameThrowerCH.png" id="6_kd6ib"]
 [ext_resource type="Texture2D" uid="uid://dqlxgnq3yi415" path="res://Assets/Towers/GunPackedCH.png" id="7_ipgkq"]
 [ext_resource type="Texture2D" uid="uid://chuny0run43wf" path="res://Assets/Towers/MissileCH.png" id="8_w61c3"]
 [ext_resource type="Texture2D" uid="uid://22j1qn8ygppx" path="res://Assets/Towers/BowCH.png" id="9_3ag03"]
@@ -22,38 +22,9 @@
 [ext_resource type="FontFile" uid="uid://dric6xod7yyjs" path="res://Assets/Fonts/EraserDust.ttf" id="16_vjwya"]
 [ext_resource type="PackedScene" uid="uid://y2fiahxu5ds0" path="res://Scenes/SupportScenes/round_change.tscn" id="17_nboh6"]
 [ext_resource type="Texture2D" uid="uid://bseuy03k7sl5f" path="res://Assets/UI/Art/FastW.png" id="18_ssf4q"]
-[ext_resource type="PackedScene" uid="uid://cp270tkjlc8pp" path="res://Scenes/UIScene/pack_screen.tscn" id="18_yqf7s"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_u0u5j"]
 size = Vector2(82, 713)
-
-[sub_resource type="Animation" id="Animation_v8wi4"]
-resource_name = "Hit"
-length = 0.2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("TextureRect:self_modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2),
-"transitions": PackedFloat32Array(1, 1e-05, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 1), Color(1, 0.2, 0.0901961, 1), Color(1, 1, 1, 1)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("TextureRect:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector2(850, -10), Vector2(855, -15), Vector2(850, -10)]
-}
 
 [sub_resource type="Animation" id="Animation_6pvmx"]
 resource_name = "Fire"
@@ -107,6 +78,34 @@ tracks/3/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [false, true, false, true, false, true, false]
+}
+
+[sub_resource type="Animation" id="Animation_v8wi4"]
+resource_name = "Hit"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1e-05, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 0.2, 0.0901961, 1), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TextureRect:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(850, -10), Vector2(855, -15), Vector2(850, -10)]
 }
 
 [sub_resource type="Animation" id="Animation_0gy2n"]
@@ -213,8 +212,6 @@ shadow_offset = Vector2(5, 5)
 [node name="GameScene" type="Node2D"]
 script = ExtResource("1_ndaas")
 
-[node name="Map1" parent="." instance=ExtResource("1_mq6ev")]
-
 [node name="Base" type="Node2D" parent="."]
 process_mode = 1
 position = Vector2(100, 0)
@@ -320,9 +317,22 @@ theme_override_constants/separation = 0
 alignment = 1
 vertical = true
 
+[node name="FlameThrower" type="TextureButton" parent="UI/HUD/BuildBar" groups=["build_buttons"]]
+process_mode = 3
+custom_minimum_size = Vector2(75, 75)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture_normal = ExtResource("6_kd6ib")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="CostText" parent="UI/HUD/BuildBar/FlameThrower" instance=ExtResource("5_tnv53")]
+visible = false
+
 [node name="Gun" type="TextureButton" parent="UI/HUD/BuildBar" groups=["build_buttons"]]
 process_mode = 3
-custom_minimum_size = Vector2(125, 100)
+custom_minimum_size = Vector2(75, 50)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -332,14 +342,10 @@ stretch_mode = 0
 
 [node name="CostText" parent="UI/HUD/BuildBar/Gun" instance=ExtResource("5_tnv53")]
 visible = false
-offset_left = 25.0
-offset_top = 25.0
-offset_right = 25.0
-offset_bottom = 25.0
 
 [node name="TeslaCoil" type="TextureButton" parent="UI/HUD/BuildBar" groups=["build_buttons"]]
 process_mode = 3
-custom_minimum_size = Vector2(125, 100)
+custom_minimum_size = Vector2(75, 75)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -349,10 +355,6 @@ stretch_mode = 0
 
 [node name="CostText" parent="UI/HUD/BuildBar/TeslaCoil" instance=ExtResource("5_tnv53")]
 visible = false
-offset_left = 25.0
-offset_top = 25.0
-offset_right = 25.0
-offset_bottom = 25.0
 
 [node name="GunPacked" type="TextureButton" parent="UI/HUD/BuildBar" groups=["build_buttons"]]
 visible = false
@@ -366,13 +368,9 @@ stretch_mode = 0
 
 [node name="CostText" parent="UI/HUD/BuildBar/GunPacked" instance=ExtResource("5_tnv53")]
 visible = false
-offset_left = 25.0
-offset_top = 25.0
-offset_right = 25.0
-offset_bottom = 25.0
 
 [node name="Missile" type="TextureButton" parent="UI/HUD/BuildBar" groups=["build_buttons"]]
-custom_minimum_size = Vector2(125, 100)
+custom_minimum_size = Vector2(75, 50)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -383,13 +381,9 @@ stretch_mode = 0
 [node name="CostText" parent="UI/HUD/BuildBar/Missile" instance=ExtResource("5_tnv53")]
 visible = false
 layout_mode = 1
-offset_left = 25.0
-offset_top = 25.0
-offset_right = 25.0
-offset_bottom = 25.0
 
 [node name="CrossBow" type="TextureButton" parent="UI/HUD/BuildBar" groups=["build_buttons"]]
-custom_minimum_size = Vector2(125, 100)
+custom_minimum_size = Vector2(75, 50)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -400,10 +394,6 @@ stretch_mode = 0
 [node name="CostText" parent="UI/HUD/BuildBar/CrossBow" instance=ExtResource("5_tnv53")]
 visible = false
 layout_mode = 1
-offset_left = 25.0
-offset_top = 25.0
-offset_right = 25.0
-offset_bottom = 25.0
 
 [node name="CrossBowPacked" type="TextureButton" parent="UI/HUD/BuildBar" groups=["build_buttons"]]
 visible = false
@@ -539,12 +529,11 @@ expand_mode = 1
 [node name="RoundChange" parent="UI/HUD" instance=ExtResource("17_nboh6")]
 position = Vector2(228, 0)
 
-[node name="PackScreen" parent="UI" instance=ExtResource("18_yqf7s")]
-visible = false
-
 [connection signal="body_entered" from="Base/Area2D" to="Base" method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Base/Area2D" to="Base" method="_on_area_2d_body_exited"]
 [connection signal="timeout" from="Base/Damage" to="Base" method="_on_damage_timeout"]
+[connection signal="mouse_entered" from="UI/HUD/BuildBar/FlameThrower" to="UI/HUD/BuildBar/FlameThrower/CostText" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="UI/HUD/BuildBar/FlameThrower" to="UI/HUD/BuildBar/FlameThrower/CostText" method="_on_mouse_exited"]
 [connection signal="mouse_entered" from="UI/HUD/BuildBar/Gun" to="UI/HUD/BuildBar/Gun/CostText" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="UI/HUD/BuildBar/Gun" to="UI/HUD/BuildBar/Gun/CostText" method="_on_mouse_exited"]
 [connection signal="mouse_entered" from="UI/HUD/BuildBar/TeslaCoil" to="UI/HUD/BuildBar/TeslaCoil/CostText" method="_on_mouse_entered"]

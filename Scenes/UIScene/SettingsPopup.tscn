@@ -1,0 +1,120 @@
+[gd_scene load_steps=4 format=3 uid="uid://ch6kkyci1h0yx"]
+
+[ext_resource type="Texture2D" uid="uid://bcfka8qefepmi" path="res://Assets/UI/Art/BackGround.png" id="1_kbghl"]
+[ext_resource type="Script" path="res://Scenes/UIScenes/SettingsPopup.gd" id="1_rpm58"]
+[ext_resource type="FontFile" uid="uid://dfhoi7yweobey" path="res://Assets/Fonts/Kenney Future Narrow.ttf" id="2_d34p4"]
+
+[node name="SettingsPopup" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_rpm58")
+
+[node name="B" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(400, 550)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -275.0
+offset_right = 200.0
+offset_bottom = 275.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_kbghl")
+expand_mode = 1
+
+[node name="V" type="VBoxContainer" parent="B"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 40
+alignment = 1
+
+[node name="Resume" type="TextureButton" parent="B/V"]
+custom_minimum_size = Vector2(300, 90)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Label" type="Label" parent="B/V/Resume"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_d34p4")
+theme_override_font_sizes/font_size = 60
+text = "Resume"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Restart" type="TextureButton" parent="B/V"]
+custom_minimum_size = Vector2(300, 90)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Label" type="Label" parent="B/V/Restart"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_d34p4")
+theme_override_font_sizes/font_size = 60
+text = "Restart"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Settings" type="TextureButton" parent="B/V"]
+custom_minimum_size = Vector2(300, 90)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Label" type="Label" parent="B/V/Settings"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_d34p4")
+theme_override_font_sizes/font_size = 60
+text = "Settings"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Quit" type="TextureButton" parent="B/V"]
+custom_minimum_size = Vector2(300, 90)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Label" type="Label" parent="B/V/Quit"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_d34p4")
+theme_override_font_sizes/font_size = 60
+text = "Quit"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="child_exiting_tree" from="." to="." method="_on_child_exiting_tree"]
+[connection signal="pressed" from="B/V/Resume" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="B/V/Restart" to="." method="_on_restart_pressed"]
+[connection signal="pressed" from="B/V/Settings" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="B/V/Quit" to="." method="_on_quit_pressed"]
