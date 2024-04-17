@@ -1,0 +1,162 @@
+[gd_scene load_steps=17 format=3 uid="uid://b1kh0b80abtmf"]
+
+[ext_resource type="Script" path="res://Scenes/Turrets/Mortar.gd" id="1_mlm3f"]
+[ext_resource type="Texture2D" uid="uid://bsfmk7wlrywpg" path="res://Assets/Towers/mortarBase.png" id="2_hyt2x"]
+[ext_resource type="Texture2D" uid="uid://bjtnrvoyqr8jl" path="res://Assets/Towers/mortarTurret.png" id="3_mvrpb"]
+[ext_resource type="Texture2D" uid="uid://c5mvlih4s5ddj" path="res://Assets/Effects/mortarFlash.png" id="4_0npj8"]
+[ext_resource type="Texture2D" uid="uid://bdv0801vxdulj" path="res://Assets/Effects/explosion1.png" id="5_js0v2"]
+[ext_resource type="Texture2D" uid="uid://bcrk67ne2s07l" path="res://Assets/Effects/explosion2.png" id="6_16q8x"]
+[ext_resource type="Texture2D" uid="uid://dxl6dmfs6nnit" path="res://Assets/Effects/explosion3.png" id="7_n6mb6"]
+[ext_resource type="Texture2D" uid="uid://c6d33bva05y5m" path="res://Assets/Effects/explosion4.png" id="8_7xklp"]
+[ext_resource type="Texture2D" uid="uid://hkn1w5yw7owg" path="res://Assets/Effects/explosion5.png" id="9_ca4wk"]
+[ext_resource type="AudioStream" uid="uid://bqvpckem6ervr" path="res://Resources/Sounds/zapsplat_warfare_mortar_projectile_launch_003_25233.mp3" id="10_5ebff"]
+[ext_resource type="AudioStream" uid="uid://bge22i46f2uke" path="res://Resources/Sounds/zapsplat_explosion_detonate_blast_designed_002_89754.mp3" id="11_jal53"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4n0lu"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ysada"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_js0v2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_16q8x")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_n6mb6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_7xklp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_ca4wk")
+}],
+"loop": false,
+"name": &"MortarExplosion",
+"speed": 5.0
+}]
+
+[sub_resource type="Animation" id="Animation_gvosj"]
+resource_name = "Explode"
+length = 0.5
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0.2, 0.2), Vector2(2, 2)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AnimatedSprite2D:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_qhv1o"]
+resource_name = "Flash"
+length = 0.5
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Turret/Muzzle/MuzzleFlash:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Turret/Muzzle/MuzzleFlash:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0.3, 1), Vector2(1.2, 1.2)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_kwcil"]
+_data = {
+"Explode": SubResource("Animation_gvosj"),
+"Flash": SubResource("Animation_qhv1o")
+}
+
+[node name="Mortar" type="Node2D"]
+script = ExtResource("1_mlm3f")
+
+[node name="Base" type="Sprite2D" parent="."]
+position = Vector2(9, -9)
+scale = Vector2(1.8, 1.8)
+texture = ExtResource("2_hyt2x")
+
+[node name="Turret" type="Sprite2D" parent="."]
+scale = Vector2(1.8, 1.8)
+texture = ExtResource("3_mvrpb")
+offset = Vector2(10, -2)
+
+[node name="Muzzle" type="Marker2D" parent="Turret"]
+position = Vector2(25, 0)
+
+[node name="MuzzleFlash" type="Sprite2D" parent="Turret/Muzzle"]
+modulate = Color(1, 1, 1, 0)
+position = Vector2(1.66667, 0)
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("4_0npj8")
+offset = Vector2(4, -5)
+
+[node name="Range" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Range"]
+shape = SubResource("CircleShape2D_4n0lu")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.2, 0.2)
+sprite_frames = SubResource("SpriteFrames_ysada")
+animation = &"MortarExplosion"
+speed_scale = 3.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_kwcil")
+}
+
+[node name="MortarLaunchSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_5ebff")
+
+[node name="MortarImpactSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_jal53")
+
+[connection signal="body_entered" from="Range" to="." method="_on_range_body_entered"]
+[connection signal="body_exited" from="Range" to="." method="_on_range_body_exited"]

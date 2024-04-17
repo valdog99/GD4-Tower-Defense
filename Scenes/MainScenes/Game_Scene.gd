@@ -25,15 +25,12 @@ func _ready():
 	var map = load("res://Scenes/Maps/Map" + str(level) + ".tscn").instantiate()
 	add_child(map)
 	move_child(map, 0)
+	var hound_wave = randi_range(1, 2)
 	map_node = get_node("Map" + str(level))
-	for i in get_tree().get_nodes_in_group("build_buttons"):
-		i.pressed.connect(initiate_build_mode.bind(i.name))
-	for i in range(5):
-		var wave = GameData.wave_data[map_node.name]["Wave" + str(i + 1)]
-		for z in range(10):
-			var zom_array = ["Zombie_Normal", int(z + 4)]
-			wave.append(zom_array)
-			
+	get_node("UI/HUD/H/InfoBar/HBox/Box").modulate = Color("ffffff2e")
+	
+	
+
 	
 	
 func _process(delta):
@@ -62,6 +59,9 @@ func start_next_wave():
 	get_node("Base").BaseDamaged.connect(on_base_damage)
 func retrieve_wave_data():
 	var wave_data = GameData.wave_data[map_node.name]["Wave" + str(current_wave)]
+	if current_wave == 2:
+		get_node("UI/HUD/H/InfoBar/HBox/Box").modulate = Color("ffffff")
+		UI_node.box_unlock = true
 	current_wave += 1
 #	if current_wave == 5:
 #		for z in range(10):
@@ -71,13 +71,25 @@ func retrieve_wave_data():
 	
 func spawn_enemies(wave_data):
 	for i in wave_data:
-		var new_enemy = load("res://Scenes/Enemies/" + i[0] + ".tscn").instantiate()
-		map_node.get_node("Path2D").add_child(new_enemy, true) 
-		var path_node = map_node.get_node("Path2D")
+		if map_node.name == "Map2":
+			var new_enemy = load("res://Scenes/Enemies/" + i[0] + ".tscn").instantiate()
+			var new_enemy2 = load("res://Scenes/Enemies/" + i[0] + ".tscn").instantiate()
+			var path_node = map_node.get_node("Path2D")
+			var path_node2 = map_node.get_node("Path2D2")			
+			path_node.add_child(new_enemy, true) 	
+			path_node2.add_child(new_enemy2, true) 
+			new_enemy.death.connect(on_enemy_killed)
+			await(get_tree().create_timer(i[1])).timeout
+		else:
+			var new_enemy = load("res://Scenes/Enemies/" + i[0] + ".tscn").instantiate()
+			var path_node = map_node.get_node("Path2D")
+			path_node.add_child(new_enemy, true) 
+			new_enemy.death.connect(on_enemy_killed)
+			await(get_tree().create_timer(i[1])).timeout
+		
 		#var enemy = path_node.get_node(i[0])
 		#new_enemy.base_damage.connect(on_base_damage)
-		new_enemy.death.connect(on_enemy_killed)
-		await(get_tree().create_timer(i[1])).timeout
+		
 
 ##
 ## Building Functions
@@ -87,7 +99,7 @@ func spawn_enemies(wave_data):
 func initiate_build_mode(tower_type):
 	if build_mode:
 		cancel_build_mode()
-	for i in get_node("Map1/Turrets").get_children():
+	for i in map_node.get_node("Turrets").get_children():
 		if i.get_node_or_null("SellButton"):
 			i.get_node("SellButton").queue_free()
 	build_type = tower_type
@@ -141,3 +153,21 @@ func on_enemy_killed(value):
 	enemies_in_wave -= 1
 	UI_node.gain_cash(value)
 	
+
+
+func _on_item_list_item_selected(index):
+	var guns = get_node("UI/HUD/B/ItemList").guns
+	var gun_name
+	for i in guns:
+		if i == "CrossBow":
+			gun_name = "Cross\nBow"
+		elif i == "TeslaCoil":
+			gun_name = "Tesla\nCoil"
+		elif i == "FlameThrower":
+			gun_name = "Flame\nThrower"
+		else:
+			gun_name = i
+		if gun_name in get_node("UI/HUD/B/ItemList").get_item_text(index):
+			var gun = i
+			print(str(gun))
+			initiate_build_mode(gun) # Replace with function body.

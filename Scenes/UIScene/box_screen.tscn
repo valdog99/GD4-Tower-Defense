@@ -1,0 +1,119 @@
+[gd_scene load_steps=6 format=3 uid="uid://dbfhl1ydxrgis"]
+
+[ext_resource type="Script" path="res://Scenes/MainScenes/BoxScreen.gd" id="1_pevgk"]
+[ext_resource type="Texture2D" uid="uid://o636k0vi0dsg" path="res://Assets/UI/Buttons/Box.png" id="2_txwof"]
+[ext_resource type="FontFile" uid="uid://dric6xod7yyjs" path="res://Assets/Fonts/EraserDust.ttf" id="3_kg70r"]
+
+[sub_resource type="Animation" id="Animation_cbswy"]
+resource_name = "float"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Box:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(140, 60), Vector2(140, 60)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8teic"]
+_data = {
+"float": SubResource("Animation_cbswy")
+}
+
+[node name="BoxScreen" type="Control"]
+process_mode = 3
+custom_minimum_size = Vector2(1280, 720)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 1
+script = ExtResource("1_pevgk")
+
+[node name="Box" type="TextureButton" parent="."]
+custom_minimum_size = Vector2(1000, 600)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -500.0
+offset_top = -300.0
+offset_right = 500.0
+offset_bottom = 300.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+texture_normal = ExtResource("2_txwof")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -527.5
+offset_right = 527.5
+offset_bottom = 129.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("3_kg70r")
+theme_override_font_sizes/font_size = 125
+text = "Click To Spin For"
+uppercase = true
+
+[node name="SpinPrice" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -130.5
+offset_top = -187.0
+offset_right = 130.5
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(0, 0.592157, 0, 1)
+theme_override_fonts/font = ExtResource("3_kg70r")
+theme_override_font_sizes/font_size = 180
+text = "$50"
+
+[node name="TextureRect" type="TextureRect" parent="."]
+visible = false
+custom_minimum_size = Vector2(400, 300)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -285.0
+offset_right = 200.0
+offset_bottom = 15.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+expand_mode = 1
+
+[node name="Changer" type="Timer" parent="."]
+wait_time = 0.25
+autostart = true
+
+[node name="Done" type="Timer" parent="."]
+wait_time = 3.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_8teic")
+}
+
+[connection signal="pressed" from="Box" to="." method="_on_box_pressed"]
+[connection signal="timeout" from="Changer" to="." method="_on_changer_timeout"]
+[connection signal="timeout" from="Done" to="." method="_on_done_timeout"]

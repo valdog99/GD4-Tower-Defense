@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Scenes/UIScene/LevelSelect.gd" id="1_uadpg"]
 [ext_resource type="Texture2D" uid="uid://c2h5ktmgwoibr" path="res://Assets/UI/Art/BackGround.png" id="2_7gatr"]
-[ext_resource type="Texture2D" uid="uid://dfxpar3tomyu7" path="res://Assets/Maps/map1.png" id="3_1n2ok"]
+[ext_resource type="Texture2D" uid="uid://dfxpar3tomyu7" path="res://Assets/Maps/Map1.png" id="3_1n2ok"]
 [ext_resource type="FontFile" uid="uid://dric6xod7yyjs" path="res://Assets/Fonts/EraserDust.ttf" id="4_c5hm1"]
 [ext_resource type="FontFile" uid="uid://bmfrkd276lcsd" path="res://Assets/Fonts/Kenney Future Narrow.ttf" id="4_yitii"]
 [ext_resource type="Texture2D" uid="uid://diyn8vh6pgisr" path="res://Assets/UI/Art/playW.png" id="6_c0jpf"]

@@ -69,6 +69,7 @@ stretch_mode = 0
 
 [node name="Label" type="Label" parent="M/HBoxContainer/Endless"]
 custom_minimum_size = Vector2(200, 200)
+layout_mode = 0
 offset_left = 34.0
 offset_top = 387.0
 offset_right = 291.0
@@ -89,6 +90,7 @@ stretch_mode = 0
 
 [node name="Label" type="Label" parent="M/HBoxContainer/Challenge"]
 custom_minimum_size = Vector2(200, 200)
+layout_mode = 0
 offset_left = 34.0
 offset_top = 387.0
 offset_right = 291.0

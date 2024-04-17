@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://1q44x6u5y3sb"]
 
 [ext_resource type="Script" path="res://Scenes/Turrets/Gun.gd" id="1_iq5w8"]
-[ext_resource type="Texture2D" uid="uid://c3fmtg8h3atfe" path="res://Assets/Towers/towerDefense_tile181.png" id="2_ery28"]
+[ext_resource type="Texture2D" uid="uid://brr25g8s83l0m" path="res://Assets/Towers/TowerBase.png" id="2_nyefs"]
 [ext_resource type="Texture2D" uid="uid://cebpnqfg0hmxc" path="res://Assets/Towers/Gun.png" id="3_o3mr4"]
 [ext_resource type="Texture2D" uid="uid://d4ce0ehlcbtkm" path="res://Assets/Effects/towerDefense_tile297.png" id="4_j82km"]
 [ext_resource type="AudioStream" uid="uid://nxgn880avwwr" path="res://Resources/Sounds/zapsplat_warfare_gun_rifles_single_shot_designed_71743.mp3" id="5_i17ay"]
@@ -39,17 +39,17 @@ _data = {
 script = ExtResource("1_iq5w8")
 
 [node name="Base" type="Sprite2D" parent="."]
-texture = ExtResource("2_ery28")
+texture = ExtResource("2_nyefs")
 
 [node name="Turret" type="Sprite2D" parent="."]
 texture = ExtResource("3_o3mr4")
 offset = Vector2(12, 0)
 
 [node name="Muzzle" type="Marker2D" parent="Turret"]
-visible = false
-position = Vector2(43, 0)
+position = Vector2(46.795, 1)
 
 [node name="MuzzleFlash" type="Sprite2D" parent="Turret/Muzzle"]
+visible = false
 position = Vector2(10, 0)
 scale = Vector2(0.7, 0.7)
 texture = ExtResource("4_j82km")
@@ -67,6 +67,8 @@ libraries = {
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_i17ay")
+volume_db = 2.667
+pitch_scale = 1.13
 
 [connection signal="body_entered" from="Range" to="." method="_on_range_body_entered"]
 [connection signal="body_exited" from="Range" to="." method="_on_range_body_exited"]

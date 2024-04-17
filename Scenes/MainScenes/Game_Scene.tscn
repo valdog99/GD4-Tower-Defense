@@ -4,24 +4,24 @@
 [ext_resource type="Script" path="res://Scenes/MainScenes/UI.gd" id="3_fbc3h"]
 [ext_resource type="Script" path="res://Scenes/Maps/Base.gd" id="3_vh0ua"]
 [ext_resource type="Texture2D" uid="uid://chsn2oxanj63m" path="res://Assets/Environment/Base.png" id="4_5jvff"]
-[ext_resource type="PackedScene" uid="uid://jtahul4s1fdq" path="res://Scenes/SupportScenes/cost_text.tscn" id="5_tnv53"]
 [ext_resource type="Texture2D" uid="uid://skomcafjbwrq" path="res://Assets/Towers/GunCH.png" id="5_xef0h"]
 [ext_resource type="Texture2D" uid="uid://bgi78qpcyafan" path="res://Assets/UI/Art/shots1.png" id="5_xqqav"]
-[ext_resource type="Texture2D" uid="uid://bx5jeg85d1eog" path="res://Assets/Towers/TeslaTowerIcon.png" id="6_jq7ix"]
+[ext_resource type="Texture2D" uid="uid://bx5jeg85d1eog" path="res://Assets/Towers/TeslaCoilCH.png" id="6_jq7ix"]
 [ext_resource type="Texture2D" uid="uid://boorpiw4bcsmy" path="res://Assets/Towers/FlameThrowerCH.png" id="6_kd6ib"]
-[ext_resource type="Texture2D" uid="uid://dqlxgnq3yi415" path="res://Assets/Towers/GunPackedCH.png" id="7_ipgkq"]
 [ext_resource type="Texture2D" uid="uid://chuny0run43wf" path="res://Assets/Towers/MissileCH.png" id="8_w61c3"]
-[ext_resource type="Texture2D" uid="uid://22j1qn8ygppx" path="res://Assets/Towers/BowCH.png" id="9_3ag03"]
+[ext_resource type="Texture2D" uid="uid://22j1qn8ygppx" path="res://Assets/Towers/CrossBowCH.png" id="9_3ag03"]
 [ext_resource type="Texture2D" uid="uid://c8nv4rcngm3go" path="res://Assets/UI/HPbar.jpg" id="10_1vpf7"]
+[ext_resource type="Script" path="res://Scenes/MainScenes/ItemList.gd" id="11_j32ww"]
 [ext_resource type="Texture2D" uid="uid://dnxva50xdvrvs" path="res://Assets/UI/home.png" id="12_dwd0w"]
-[ext_resource type="Texture2D" uid="uid://ddglc2ty1gdgf" path="res://Assets/UI/Buttons/PackAPunch.png" id="12_v6fqf"]
 [ext_resource type="Texture2D" uid="uid://cmiu4rwgwuy0p" path="res://Assets/UI/Art/play.png" id="13_i5723"]
+[ext_resource type="Texture2D" uid="uid://o636k0vi0dsg" path="res://Assets/UI/Buttons/Box.png" id="14_63e2e"]
 [ext_resource type="Texture2D" uid="uid://c4ts5v6yx54dj" path="res://Assets/UI/Art/FastR.png" id="14_ynx6q"]
 [ext_resource type="PackedScene" uid="uid://d18w7kr6ryv1f" path="res://Scenes/SupportScenes/wave_counter.tscn" id="15_1p2rm"]
 [ext_resource type="Texture2D" uid="uid://04dh6lixa48h" path="res://Assets/UI/Art/pauseW.png" id="16_5v754"]
 [ext_resource type="FontFile" uid="uid://dric6xod7yyjs" path="res://Assets/Fonts/EraserDust.ttf" id="16_vjwya"]
 [ext_resource type="PackedScene" uid="uid://y2fiahxu5ds0" path="res://Scenes/SupportScenes/round_change.tscn" id="17_nboh6"]
 [ext_resource type="Texture2D" uid="uid://bseuy03k7sl5f" path="res://Assets/UI/Art/FastW.png" id="18_ssf4q"]
+[ext_resource type="Texture2D" uid="uid://b1yd4y7hhqfhq" path="res://Icons/settingIcon.png" id="20_pd1jb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_u0u5j"]
 size = Vector2(82, 713)
@@ -224,6 +224,7 @@ offset_top = -10.0
 offset_right = 1930.0
 offset_bottom = 740.0
 pivot_offset = Vector2(122, 0)
+mouse_filter = 2
 texture = ExtResource("4_5jvff")
 flip_h = true
 
@@ -301,121 +302,53 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="BuildBar" type="BoxContainer" parent="UI/HUD"]
-custom_minimum_size = Vector2(100, 400)
+[node name="B" type="TextureRect" parent="UI/HUD"]
+self_modulate = Color(0, 0, 0, 0.847059)
+show_behind_parent = true
+custom_minimum_size = Vector2(200, 0)
 layout_mode = 1
-anchors_preset = 3
+anchors_preset = 11
 anchor_left = 1.0
-anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -150.0
-offset_top = -500.0
 grow_horizontal = 0
-grow_vertical = 0
-theme_override_constants/separation = 0
-alignment = 1
-vertical = true
+grow_vertical = 2
+texture = ExtResource("10_1vpf7")
 
-[node name="FlameThrower" type="TextureButton" parent="UI/HUD/BuildBar" groups=["build_buttons"]]
-process_mode = 3
-custom_minimum_size = Vector2(75, 75)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-texture_normal = ExtResource("6_kd6ib")
-ignore_texture_size = true
-stretch_mode = 0
-
-[node name="CostText" parent="UI/HUD/BuildBar/FlameThrower" instance=ExtResource("5_tnv53")]
-visible = false
-
-[node name="Gun" type="TextureButton" parent="UI/HUD/BuildBar" groups=["build_buttons"]]
-process_mode = 3
-custom_minimum_size = Vector2(75, 50)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-texture_normal = ExtResource("5_xef0h")
-ignore_texture_size = true
-stretch_mode = 0
-
-[node name="CostText" parent="UI/HUD/BuildBar/Gun" instance=ExtResource("5_tnv53")]
-visible = false
-
-[node name="TeslaCoil" type="TextureButton" parent="UI/HUD/BuildBar" groups=["build_buttons"]]
-process_mode = 3
-custom_minimum_size = Vector2(75, 75)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-texture_normal = ExtResource("6_jq7ix")
-ignore_texture_size = true
-stretch_mode = 0
-
-[node name="CostText" parent="UI/HUD/BuildBar/TeslaCoil" instance=ExtResource("5_tnv53")]
-visible = false
-
-[node name="GunPacked" type="TextureButton" parent="UI/HUD/BuildBar" groups=["build_buttons"]]
-visible = false
-custom_minimum_size = Vector2(125, 100)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-texture_normal = ExtResource("7_ipgkq")
-ignore_texture_size = true
-stretch_mode = 0
-
-[node name="CostText" parent="UI/HUD/BuildBar/GunPacked" instance=ExtResource("5_tnv53")]
-visible = false
-
-[node name="Missile" type="TextureButton" parent="UI/HUD/BuildBar" groups=["build_buttons"]]
-custom_minimum_size = Vector2(75, 50)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-texture_normal = ExtResource("8_w61c3")
-ignore_texture_size = true
-stretch_mode = 0
-
-[node name="CostText" parent="UI/HUD/BuildBar/Missile" instance=ExtResource("5_tnv53")]
-visible = false
+[node name="ItemList" type="ItemList" parent="UI/HUD/B"]
+custom_minimum_size = Vector2(200, 0)
 layout_mode = 1
-
-[node name="CrossBow" type="TextureButton" parent="UI/HUD/BuildBar" groups=["build_buttons"]]
-custom_minimum_size = Vector2(75, 50)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-texture_normal = ExtResource("9_3ag03")
-ignore_texture_size = true
-stretch_mode = 0
-
-[node name="CostText" parent="UI/HUD/BuildBar/CrossBow" instance=ExtResource("5_tnv53")]
-visible = false
-layout_mode = 1
-
-[node name="CrossBowPacked" type="TextureButton" parent="UI/HUD/BuildBar" groups=["build_buttons"]]
-visible = false
-self_modulate = Color(0.117647, 0.145098, 0.137255, 1)
-custom_minimum_size = Vector2(100, 100)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-texture_normal = ExtResource("9_3ag03")
-ignore_texture_size = true
-stretch_mode = 0
-
-[node name="CostText" parent="UI/HUD/BuildBar/CrossBowPacked" instance=ExtResource("5_tnv53")]
-visible = false
-layout_mode = 2
-offset_left = 25.0
-offset_top = 25.0
-offset_right = 25.0
-offset_bottom = 25.0
-
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/HUD/BuildBar"]
-layout_mode = 2
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -200.0
+offset_top = 80.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0.568627, 0, 1)
+theme_override_fonts/font = ExtResource("16_vjwya")
+theme_override_font_sizes/font_size = 20
+allow_reselect = true
+max_text_lines = 3
+text_overrun_behavior = 2
+item_count = 5
+max_columns = 2
+same_column_width = true
+fixed_column_width = 85
+icon_mode = 0
+fixed_icon_size = Vector2i(75, 75)
+item_0/text = "25"
+item_0/icon = ExtResource("9_3ag03")
+item_1/text = "50"
+item_1/icon = ExtResource("8_w61c3")
+item_2/text = "10"
+item_2/icon = ExtResource("6_jq7ix")
+item_3/text = "25"
+item_3/icon = ExtResource("5_xef0h")
+item_4/text = "25"
+item_4/icon = ExtResource("6_kd6ib")
+script = ExtResource("11_j32ww")
 
 [node name="H" type="TextureRect" parent="UI/HUD"]
 self_modulate = Color(0, 0, 0, 0.670588)
@@ -462,14 +395,11 @@ size_flags_vertical = 0
 size_flags_stretch_ratio = 10.0
 alignment = 1
 
-[node name="PackAPucnch" type="TextureButton" parent="UI/HUD/H/InfoBar/HBox"]
+[node name="Box" type="TextureButton" parent="UI/HUD/H/InfoBar/HBox"]
 process_mode = 3
-custom_minimum_size = Vector2(80, 80)
+custom_minimum_size = Vector2(125, 0)
 layout_mode = 2
-size_flags_horizontal = 6
-toggle_mode = true
-button_pressed = true
-texture_normal = ExtResource("12_v6fqf")
+texture_normal = ExtResource("14_63e2e")
 ignore_texture_size = true
 stretch_mode = 0
 
@@ -508,6 +438,18 @@ texture_normal = ExtResource("18_ssf4q")
 texture_pressed = ExtResource("14_ynx6q")
 stretch_mode = 0
 
+[node name="Settings" type="TextureButton" parent="UI/HUD/H/InfoBar/HBox/GameControls"]
+process_mode = 3
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+toggle_mode = true
+button_pressed = true
+texture_normal = ExtResource("20_pd1jb")
+ignore_texture_size = true
+stretch_mode = 0
+
 [node name="HealthNum" type="Label" parent="UI/HUD/H/InfoBar"]
 custom_minimum_size = Vector2(150, 50)
 layout_mode = 2
@@ -532,20 +474,10 @@ position = Vector2(228, 0)
 [connection signal="body_entered" from="Base/Area2D" to="Base" method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Base/Area2D" to="Base" method="_on_area_2d_body_exited"]
 [connection signal="timeout" from="Base/Damage" to="Base" method="_on_damage_timeout"]
-[connection signal="mouse_entered" from="UI/HUD/BuildBar/FlameThrower" to="UI/HUD/BuildBar/FlameThrower/CostText" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="UI/HUD/BuildBar/FlameThrower" to="UI/HUD/BuildBar/FlameThrower/CostText" method="_on_mouse_exited"]
-[connection signal="mouse_entered" from="UI/HUD/BuildBar/Gun" to="UI/HUD/BuildBar/Gun/CostText" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="UI/HUD/BuildBar/Gun" to="UI/HUD/BuildBar/Gun/CostText" method="_on_mouse_exited"]
-[connection signal="mouse_entered" from="UI/HUD/BuildBar/TeslaCoil" to="UI/HUD/BuildBar/TeslaCoil/CostText" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="UI/HUD/BuildBar/TeslaCoil" to="UI/HUD/BuildBar/TeslaCoil/CostText" method="_on_mouse_exited"]
-[connection signal="mouse_entered" from="UI/HUD/BuildBar/GunPacked" to="UI/HUD/BuildBar/GunPacked/CostText" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="UI/HUD/BuildBar/GunPacked" to="UI/HUD/BuildBar/GunPacked/CostText" method="_on_mouse_exited"]
-[connection signal="mouse_entered" from="UI/HUD/BuildBar/Missile" to="UI/HUD/BuildBar/Missile/CostText" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="UI/HUD/BuildBar/Missile" to="UI/HUD/BuildBar/Missile/CostText" method="_on_mouse_exited"]
-[connection signal="mouse_entered" from="UI/HUD/BuildBar/CrossBow" to="UI/HUD/BuildBar/CrossBow/CostText" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="UI/HUD/BuildBar/CrossBow" to="UI/HUD/BuildBar/CrossBow/CostText" method="_on_mouse_exited"]
-[connection signal="mouse_entered" from="UI/HUD/BuildBar/CrossBowPacked" to="UI/HUD/BuildBar/CrossBowPacked/CostText" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="UI/HUD/BuildBar/CrossBowPacked" to="UI/HUD/BuildBar/CrossBowPacked/CostText" method="_on_mouse_exited"]
-[connection signal="pressed" from="UI/HUD/H/InfoBar/HBox/PackAPucnch" to="UI" method="_on_pack_a_pucnch_pressed"]
+[connection signal="item_selected" from="UI/HUD/B/ItemList" to="." method="_on_item_list_item_selected"]
+[connection signal="mouse_entered" from="UI/HUD/B/ItemList" to="UI/HUD/B/ItemList" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="UI/HUD/B/ItemList" to="UI/HUD/B/ItemList" method="_on_mouse_exited"]
+[connection signal="pressed" from="UI/HUD/H/InfoBar/HBox/Box" to="UI" method="_on_box_pressed"]
 [connection signal="pressed" from="UI/HUD/H/InfoBar/HBox/GameControls/PausePlay" to="UI" method="_on_pause_play_pressed"]
 [connection signal="pressed" from="UI/HUD/H/InfoBar/HBox/GameControls/SpeedUp" to="UI" method="_on_speed_up_pressed"]
+[connection signal="pressed" from="UI/HUD/H/InfoBar/HBox/GameControls/Settings" to="UI" method="_on_settings_pressed"]

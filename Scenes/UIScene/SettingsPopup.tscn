@@ -1,18 +1,20 @@
 [gd_scene load_steps=4 format=3 uid="uid://ch6kkyci1h0yx"]
 
-[ext_resource type="Texture2D" uid="uid://bcfka8qefepmi" path="res://Assets/UI/Art/BackGround.png" id="1_kbghl"]
-[ext_resource type="Script" path="res://Scenes/UIScenes/SettingsPopup.gd" id="1_rpm58"]
-[ext_resource type="FontFile" uid="uid://dfhoi7yweobey" path="res://Assets/Fonts/Kenney Future Narrow.ttf" id="2_d34p4"]
+[ext_resource type="Script" path="res://Scenes/UIScene/SettingsPopup.gd" id="1_ddq72"]
+[ext_resource type="Texture2D" uid="uid://c2h5ktmgwoibr" path="res://Assets/UI/Art/BackGround.png" id="1_udr81"]
+[ext_resource type="LabelSettings" uid="uid://c6mg1ugvgtucp" path="res://Assets/Fonts/Settings.tres" id="2_60f5w"]
 
 [node name="SettingsPopup" type="Control"]
 process_mode = 3
+layout_direction = 2
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_rpm58")
+script = ExtResource("1_ddq72")
 
 [node name="B" type="TextureRect" parent="."]
 custom_minimum_size = Vector2(400, 550)
@@ -28,93 +30,111 @@ offset_right = 200.0
 offset_bottom = 275.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("1_kbghl")
+texture = ExtResource("1_udr81")
 expand_mode = 1
 
 [node name="V" type="VBoxContainer" parent="B"]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/separation = 40
-alignment = 1
+theme_override_constants/separation = 5
 
 [node name="Resume" type="TextureButton" parent="B/V"]
 custom_minimum_size = Vector2(300, 90)
 layout_mode = 2
 size_flags_horizontal = 4
+size_flags_vertical = 10
 
 [node name="Label" type="Label" parent="B/V/Resume"]
+modulate = Color(0.164706, 1, 0.219608, 1)
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
 anchor_bottom = 1.0
+offset_left = -0.5
+offset_right = 0.5
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_fonts/font = ExtResource("2_d34p4")
-theme_override_font_sizes/font_size = 60
 text = "Resume"
+label_settings = ExtResource("2_60f5w")
 horizontal_alignment = 1
 vertical_alignment = 1
+uppercase = true
 
 [node name="Restart" type="TextureButton" parent="B/V"]
 custom_minimum_size = Vector2(300, 90)
 layout_mode = 2
 size_flags_horizontal = 4
+size_flags_vertical = 2
 
 [node name="Label" type="Label" parent="B/V/Restart"]
+modulate = Color(1, 0, 0, 1)
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
 anchor_bottom = 1.0
+offset_left = -0.5
+offset_right = 0.5
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_fonts/font = ExtResource("2_d34p4")
-theme_override_font_sizes/font_size = 60
 text = "Restart"
+label_settings = ExtResource("2_60f5w")
 horizontal_alignment = 1
 vertical_alignment = 1
+uppercase = true
 
 [node name="Settings" type="TextureButton" parent="B/V"]
 custom_minimum_size = Vector2(300, 90)
 layout_mode = 2
 size_flags_horizontal = 4
+size_flags_vertical = 8
 
 [node name="Label" type="Label" parent="B/V/Settings"]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
 anchor_bottom = 1.0
+offset_left = -104.0
+offset_right = 104.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_fonts/font = ExtResource("2_d34p4")
-theme_override_font_sizes/font_size = 60
 text = "Settings"
+label_settings = ExtResource("2_60f5w")
 horizontal_alignment = 1
 vertical_alignment = 1
+uppercase = true
 
-[node name="Quit" type="TextureButton" parent="B/V"]
+[node name="MainMenu" type="TextureButton" parent="B/V"]
 custom_minimum_size = Vector2(300, 90)
 layout_mode = 2
 size_flags_horizontal = 4
+size_flags_vertical = 2
 
-[node name="Label" type="Label" parent="B/V/Quit"]
+[node name="Label" type="Label" parent="B/V/MainMenu"]
+modulate = Color(1, 0.0901961, 0.0588235, 1)
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
 anchor_bottom = 1.0
+offset_left = -0.5
+offset_right = 0.5
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_fonts/font = ExtResource("2_d34p4")
-theme_override_font_sizes/font_size = 60
-text = "Quit"
+text = "MainMenu"
+label_settings = ExtResource("2_60f5w")
 horizontal_alignment = 1
 vertical_alignment = 1
+uppercase = true
 
-[connection signal="child_exiting_tree" from="." to="." method="_on_child_exiting_tree"]
 [connection signal="pressed" from="B/V/Resume" to="." method="_on_resume_pressed"]
 [connection signal="pressed" from="B/V/Restart" to="." method="_on_restart_pressed"]
 [connection signal="pressed" from="B/V/Settings" to="." method="_on_settings_pressed"]
-[connection signal="pressed" from="B/V/Quit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="B/V/MainMenu" to="." method="_on_main_menu_pressed"]

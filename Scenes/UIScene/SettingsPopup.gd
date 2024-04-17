@@ -27,3 +27,7 @@ func _on_quit_pressed():
 	get_tree().paused = false
 	get_parent().get_parent().queue_free()
 	get_parent().get_parent().get_parent().load_main_menu()
+
+
+func _on_main_menu_pressed():
+	pass # Replace with function body.

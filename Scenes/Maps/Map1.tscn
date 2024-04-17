@@ -213,6 +213,3 @@ curve = SubResource("Curve2D_egwk8")
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 visible = false
 navigation_polygon = SubResource("NavigationPolygon_o4t4j")
-
-[node name="Node2D" type="Node2D" parent="."]
-position = Vector2(988, 70)

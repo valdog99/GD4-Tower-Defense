@@ -1,0 +1,95 @@
+[gd_scene load_steps=10 format=3 uid="uid://bjwlok3vtx2nf"]
+
+[ext_resource type="Script" path="res://Scenes/Turrets/Gun.gd" id="1_80w38"]
+[ext_resource type="Texture2D" uid="uid://brr25g8s83l0m" path="res://Assets/Towers/TowerBase.png" id="2_rvqxx"]
+[ext_resource type="Texture2D" uid="uid://03jq1fckfokf" path="res://Assets/Towers/GunII.png" id="3_wqlcw"]
+[ext_resource type="Texture2D" uid="uid://d4ce0ehlcbtkm" path="res://Assets/Effects/towerDefense_tile297.png" id="4_luu86"]
+[ext_resource type="AudioStream" uid="uid://nxgn880avwwr" path="res://Resources/Sounds/zapsplat_warfare_gun_rifles_single_shot_designed_71743.mp3" id="5_70k5v"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_liplw"]
+radius = 175.0
+
+[sub_resource type="Animation" id="Animation_jkcxi"]
+resource_name = "Fire"
+length = 0.15
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Turret/Muzzle/MuzzleFlash:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.06, 0.12),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Turret/Muzzle2/MuzzleFlash:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0001, 0.06),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+
+[sub_resource type="Animation" id="Animation_rfmv2"]
+resource_name = "Upgrade"
+loop_mode = 1
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_axb8f"]
+_data = {
+"Fire": SubResource("Animation_jkcxi"),
+"Upgrade": SubResource("Animation_rfmv2")
+}
+
+[node name="GunI" type="Node2D"]
+script = ExtResource("1_80w38")
+
+[node name="Base" type="Sprite2D" parent="."]
+texture = ExtResource("2_rvqxx")
+
+[node name="Turret" type="Sprite2D" parent="."]
+texture = ExtResource("3_wqlcw")
+offset = Vector2(12, 0)
+
+[node name="Muzzle" type="Marker2D" parent="Turret"]
+position = Vector2(48, -9)
+
+[node name="MuzzleFlash" type="Sprite2D" parent="Turret/Muzzle"]
+visible = false
+position = Vector2(10, 0)
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("4_luu86")
+
+[node name="Muzzle2" type="Marker2D" parent="Turret"]
+position = Vector2(48, 10)
+
+[node name="MuzzleFlash" type="Sprite2D" parent="Turret/Muzzle2"]
+visible = false
+position = Vector2(10, 0)
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("4_luu86")
+
+[node name="Range" type="Area2D" parent="."]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Range"]
+shape = SubResource("CircleShape2D_liplw")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_axb8f")
+}
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_70k5v")
+volume_db = 2.667
+pitch_scale = 1.13
+
+[connection signal="body_entered" from="Range" to="." method="_on_range_body_entered"]
+[connection signal="body_exited" from="Range" to="." method="_on_range_body_exited"]

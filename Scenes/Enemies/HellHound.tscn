@@ -73,7 +73,7 @@ shape = SubResource("RectangleShape2D_ui4qo")
 [node name="Sprite2D" type="AnimatedSprite2D" parent="."]
 self_modulate = Color(0.458824, 0.670588, 0.909804, 1)
 sprite_frames = SubResource("SpriteFrames_1fnl2")
-frame_progress = 0.192218
+frame_progress = 0.983191
 speed_scale = 0.5
 
 [node name="HealthBar" type="TextureProgressBar" parent="."]
@@ -95,7 +95,7 @@ tint_progress = Color(0.235294, 0.498039, 0.196078, 1)
 position = Vector2(-22, -4)
 scale = Vector2(0.28, 0.28)
 
-[node name="Screach" type="AudioStreamPlayer" parent="."]
+[node name="Screech" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_2jipc")
 volume_db = 4.194
 

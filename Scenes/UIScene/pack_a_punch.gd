@@ -3,6 +3,7 @@ extends Control
 @onready var animation = get_node("AnimationPlayer")
 @onready var old_gun = get_node("Current")
 @onready var new_gun = get_node("Packed")
+@onready var UI = get_parent().get_parent().get_parent().get_parent().get_node("UI")
 
 var gun_name
 var packed_gun_name
@@ -32,7 +33,7 @@ func show_stats(selected):
 	for i in gun_types:
 		gun_type = i
 		if i != "OldGun":
-			packed_gun_name += "Packed"
+			packed_gun_name += "I"
 		for s in stats:
 			get_stat(s, gun_type)
 	animation.play("Upgrade")
@@ -56,10 +57,11 @@ func _on_verify_pressed():
 	new_tower.type = packed_gun_name
 	new_tower.category = GameData.tower_data[packed_gun_name]["category"]
 	
-	get_parent().get_parent().add_child(new_tower)
+	get_parent().get_parent().add_child(new_tower, true)
 	get_parent().get_node("InfoScreen").visible = true
 	get_parent().queue_free()
-	get_parent().get_parent().get_parent().get_parent().get_node("UI").visible = true
+	UI.visible = true
+	UI.showing_stats = false
 
 func _on_back_pressed():
 	get_parent().get_node("InfoScreen").visible = true

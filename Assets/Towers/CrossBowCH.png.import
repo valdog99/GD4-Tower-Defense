@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://22j1qn8ygppx"
-path="res://.godot/imported/BowCH.png-9ecbd17d6d0ba31d69943652ee517e48.ctex"
+path="res://.godot/imported/CrossBowCH.png-96a7b52e586e25f016e34d49d3366ea0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Towers/BowCH.png"
-dest_files=["res://.godot/imported/BowCH.png-9ecbd17d6d0ba31d69943652ee517e48.ctex"]
+source_file="res://Assets/Towers/CrossBowCH.png"
+dest_files=["res://.godot/imported/CrossBowCH.png-96a7b52e586e25f016e34d49d3366ea0.ctex"]
 
 [params]
 

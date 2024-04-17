@@ -7,7 +7,7 @@ var type
 var ready_to_fire = true
 var category
 var missile_num = 0
-
+@onready var UI = get_parent().get_parent().get_parent().get_node("UI")
 var inspect_button = preload("res://Scenes/Turrets/inspect.tscn")
 var missile_launch = preload("res://Scenes/Turrets/MissileHit.tscn")
 var info_screen = preload("res://Scenes/UIScene/info_screen.tscn")
@@ -29,23 +29,26 @@ func _physics_process(delta):
 		enemy = null
 
 func _unhandled_input(event):
-	if event.is_action_released("ui_cancel") and get_node("InfoScreen"):
+	if event.is_action_released("ui_cancel") and get_node_or_null("InfoScreen"):
 		delete_sell()
 
 func on_inspect_pressed():
 	get_parent().get_parent().get_parent().get_node("UI").visible = false
 	#var sell_button_instance = sell_button.instantiate()
 	var info_screen_instance = info_screen.instantiate()
-	add_child(info_screen_instance, true)
+	if not UI.showing_stats:
+		add_child(info_screen_instance, true)
+		UI.showing_stats = true
+
 	#add_child(sell_button_instance)
 
 func sell_tower():
-	get_parent().get_parent().get_parent().get_node("UI").visible = true
-	get_parent().get_parent().get_parent().get_node("UI").gain_cash(GameData.tower_data[type]["cost"] / 2) 
+	UI.visible = true
+	UI.gain_cash(GameData.tower_data[type]["cost"] / 2) 
 	queue_free()
 
 func delete_sell():
-	if get_node("PackAPunch"):
+	if get_node_or_null("PackAPunch"):
 		get_node("PackAPunch").free()
 		get_node("InfoScreen").visible = true
 	else:

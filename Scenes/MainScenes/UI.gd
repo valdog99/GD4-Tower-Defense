@@ -5,8 +5,11 @@ extends CanvasLayer
 @onready var cash_counter = get_node("HUD/H/InfoBar/Bal")
 @onready var wave_counter = get_node("HUD/H/InfoBar/HBox/WaveCounter")
 
-
-
+var box_popup = preload("res://Scenes/UIScene/box_screen.tscn")
+var settings_popup = preload("res://Scenes/UIScene/SettingsPopup.tscn")
+var paused
+var box_unlock = false
+var showing_stats = false
 
 func set_tower_preview(tower_type, mouse_position):
 	var drag_tower = load("res://Scenes/Turrets/" + tower_type + ".tscn").instantiate()
@@ -141,6 +144,29 @@ func gain_cash(cash):
 
 func loose_cash(cash):
 	cash_counter.text = str(int(cash_counter.text) - cash)
+
+func _on_settings_pressed():
+	if get_parent().build_mode:
+		get_parent().cancel_build_mode()
+	$HUD/H/InfoBar/HBox/GameControls/Settings.process_mode = PROCESS_MODE_PAUSABLE
+	$HUD/H/InfoBar/HBox/GameControls/PausePlay.process_mode = PROCESS_MODE_PAUSABLE
+	paused = get_tree().is_paused()
+	if not paused:
+		get_tree().paused = true
+	add_child(settings_popup.instantiate())
+	move_child($SettingsPopup, 0)
 	
-	
-	
+func reset_process_mode():
+	$HUD/H/InfoBar/HBox/GameControls/Settings.process_mode = PROCESS_MODE_ALWAYS
+	$HUD/H/InfoBar/HBox/GameControls/PausePlay.process_mode = PROCESS_MODE_ALWAYS
+
+
+func _on_box_pressed():
+	if get_parent().build_mode:
+		get_parent().cancel_build_mode()
+	else:
+		get_tree().paused = true
+	if box_unlock == true:
+		var box_scene = box_popup.instantiate()
+		add_child(box_scene)
+		get_node("HUD").visible = false 

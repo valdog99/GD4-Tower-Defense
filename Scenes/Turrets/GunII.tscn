@@ -1,0 +1,74 @@
+[gd_scene load_steps=10 format=3 uid="uid://dwere6mqnr4ap"]
+
+[ext_resource type="Script" path="res://Scenes/Turrets/Gun.gd" id="1_syecb"]
+[ext_resource type="Texture2D" uid="uid://brr25g8s83l0m" path="res://Assets/Towers/TowerBase.png" id="2_pfnp2"]
+[ext_resource type="Texture2D" uid="uid://6fm6fgxkv5t6" path="res://Assets/Towers/GunIII.png" id="3_p51ry"]
+[ext_resource type="Texture2D" uid="uid://d4ce0ehlcbtkm" path="res://Assets/Effects/towerDefense_tile297.png" id="4_ydm3a"]
+[ext_resource type="AudioStream" uid="uid://nxgn880avwwr" path="res://Resources/Sounds/zapsplat_warfare_gun_rifles_single_shot_designed_71743.mp3" id="5_rn8sl"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_liplw"]
+radius = 175.0
+
+[sub_resource type="Animation" id="Animation_jkcxi"]
+resource_name = "Fire"
+length = 0.15
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Turret/Muzzle/MuzzleFlash:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.06, 0.12),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_rfmv2"]
+resource_name = "Upgrade"
+loop_mode = 1
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_axb8f"]
+_data = {
+"Fire": SubResource("Animation_jkcxi"),
+"Upgrade": SubResource("Animation_rfmv2")
+}
+
+[node name="GunII" type="Node2D"]
+script = ExtResource("1_syecb")
+
+[node name="Base" type="Sprite2D" parent="."]
+texture = ExtResource("2_pfnp2")
+
+[node name="Turret" type="Sprite2D" parent="."]
+texture = ExtResource("3_p51ry")
+offset = Vector2(12, 0)
+
+[node name="Muzzle" type="Marker2D" parent="Turret"]
+position = Vector2(48, 0)
+
+[node name="MuzzleFlash" type="Sprite2D" parent="Turret/Muzzle"]
+visible = false
+position = Vector2(10, 0)
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("4_ydm3a")
+
+[node name="Range" type="Area2D" parent="."]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Range"]
+shape = SubResource("CircleShape2D_liplw")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_axb8f")
+}
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_rn8sl")
+volume_db = 2.667
+pitch_scale = 1.13
+
+[connection signal="body_entered" from="Range" to="." method="_on_range_body_entered"]
+[connection signal="body_exited" from="Range" to="." method="_on_range_body_exited"]
